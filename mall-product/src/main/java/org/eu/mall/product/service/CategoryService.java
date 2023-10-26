@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.eu.common.utils.PageUtils;
 import org.eu.mall.product.entity.CategoryEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,10 +12,12 @@ import java.util.Map;
  *
  * @author kevin
  * @email drzhong2015@gmail.com
- * @date 2023-10-25 05:32:12
+ * @date 2023-10-27 00:34:58
  */
 public interface CategoryService extends IService<CategoryEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<CategoryEntity> listWithTree();
 }
 

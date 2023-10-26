@@ -23,7 +23,7 @@ import org.eu.common.utils.R;
  *
  * @author kevin
  * @email drzhong2015@gmail.com
- * @date 2023-10-25 07:04:46
+ * @date 2023-10-27 00:34:58
  */
 @RestController
 @RequestMapping("product/spuinfodesc")
@@ -35,7 +35,8 @@ public class SpuInfoDescController {
      * 列表
      */
     @RequestMapping("/list")
-        public R list(@RequestParam Map<String, Object> params){
+    //@RequiresPermissions("product:spuinfodesc:list")
+    public R list(@RequestParam Map<String, Object> params){
         PageUtils page = spuInfoDescService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -46,7 +47,8 @@ public class SpuInfoDescController {
      * 信息
      */
     @RequestMapping("/info/{spuId}")
-        public R info(@PathVariable("spuId") Long spuId){
+    //@RequiresPermissions("product:spuinfodesc:info")
+    public R info(@PathVariable("spuId") Long spuId){
 		SpuInfoDescEntity spuInfoDesc = spuInfoDescService.getById(spuId);
 
         return R.ok().put("spuInfoDesc", spuInfoDesc);
@@ -56,7 +58,8 @@ public class SpuInfoDescController {
      * 保存
      */
     @RequestMapping("/save")
-        public R save(@RequestBody SpuInfoDescEntity spuInfoDesc){
+    //@RequiresPermissions("product:spuinfodesc:save")
+    public R save(@RequestBody SpuInfoDescEntity spuInfoDesc){
 		spuInfoDescService.save(spuInfoDesc);
 
         return R.ok();
@@ -66,7 +69,8 @@ public class SpuInfoDescController {
      * 修改
      */
     @RequestMapping("/update")
-        public R update(@RequestBody SpuInfoDescEntity spuInfoDesc){
+    //@RequiresPermissions("product:spuinfodesc:update")
+    public R update(@RequestBody SpuInfoDescEntity spuInfoDesc){
 		spuInfoDescService.updateById(spuInfoDesc);
 
         return R.ok();
@@ -76,7 +80,8 @@ public class SpuInfoDescController {
      * 删除
      */
     @RequestMapping("/delete")
-        public R delete(@RequestBody Long[] spuIds){
+    //@RequiresPermissions("product:spuinfodesc:delete")
+    public R delete(@RequestBody Long[] spuIds){
 		spuInfoDescService.removeByIds(Arrays.asList(spuIds));
 
         return R.ok();

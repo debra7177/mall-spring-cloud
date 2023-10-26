@@ -23,7 +23,7 @@ import org.eu.common.utils.R;
  *
  * @author kevin
  * @email drzhong2015@gmail.com
- * @date 2023-10-25 07:04:46
+ * @date 2023-10-27 00:34:58
  */
 @RestController
 @RequestMapping("product/spuinfo")
@@ -35,7 +35,8 @@ public class SpuInfoController {
      * 列表
      */
     @RequestMapping("/list")
-        public R list(@RequestParam Map<String, Object> params){
+    //@RequiresPermissions("product:spuinfo:list")
+    public R list(@RequestParam Map<String, Object> params){
         PageUtils page = spuInfoService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -46,7 +47,8 @@ public class SpuInfoController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-        public R info(@PathVariable("id") Long id){
+    //@RequiresPermissions("product:spuinfo:info")
+    public R info(@PathVariable("id") Long id){
 		SpuInfoEntity spuInfo = spuInfoService.getById(id);
 
         return R.ok().put("spuInfo", spuInfo);
@@ -56,7 +58,8 @@ public class SpuInfoController {
      * 保存
      */
     @RequestMapping("/save")
-        public R save(@RequestBody SpuInfoEntity spuInfo){
+    //@RequiresPermissions("product:spuinfo:save")
+    public R save(@RequestBody SpuInfoEntity spuInfo){
 		spuInfoService.save(spuInfo);
 
         return R.ok();
@@ -66,7 +69,8 @@ public class SpuInfoController {
      * 修改
      */
     @RequestMapping("/update")
-        public R update(@RequestBody SpuInfoEntity spuInfo){
+    //@RequiresPermissions("product:spuinfo:update")
+    public R update(@RequestBody SpuInfoEntity spuInfo){
 		spuInfoService.updateById(spuInfo);
 
         return R.ok();
@@ -76,7 +80,8 @@ public class SpuInfoController {
      * 删除
      */
     @RequestMapping("/delete")
-        public R delete(@RequestBody Long[] ids){
+    //@RequiresPermissions("product:spuinfo:delete")
+    public R delete(@RequestBody Long[] ids){
 		spuInfoService.removeByIds(Arrays.asList(ids));
 
         return R.ok();

@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mall-common</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <description>公共的依赖 bean 工具类等</description>
 
     <properties>

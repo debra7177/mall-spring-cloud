@@ -23,7 +23,7 @@ import org.eu.common.utils.R;
  *
  * @author kevin
  * @email drzhong2015@gmail.com
- * @date 2023-10-25 07:04:46
+ * @date 2023-10-27 00:34:58
  */
 @RestController
 @RequestMapping("product/attrgroup")
@@ -35,7 +35,8 @@ public class AttrGroupController {
      * 列表
      */
     @RequestMapping("/list")
-        public R list(@RequestParam Map<String, Object> params){
+    //@RequiresPermissions("product:attrgroup:list")
+    public R list(@RequestParam Map<String, Object> params){
         PageUtils page = attrGroupService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -46,7 +47,8 @@ public class AttrGroupController {
      * 信息
      */
     @RequestMapping("/info/{attrGroupId}")
-        public R info(@PathVariable("attrGroupId") Long attrGroupId){
+    //@RequiresPermissions("product:attrgroup:info")
+    public R info(@PathVariable("attrGroupId") Long attrGroupId){
 		AttrGroupEntity attrGroup = attrGroupService.getById(attrGroupId);
 
         return R.ok().put("attrGroup", attrGroup);
@@ -56,7 +58,8 @@ public class AttrGroupController {
      * 保存
      */
     @RequestMapping("/save")
-        public R save(@RequestBody AttrGroupEntity attrGroup){
+    //@RequiresPermissions("product:attrgroup:save")
+    public R save(@RequestBody AttrGroupEntity attrGroup){
 		attrGroupService.save(attrGroup);
 
         return R.ok();
@@ -66,7 +69,8 @@ public class AttrGroupController {
      * 修改
      */
     @RequestMapping("/update")
-        public R update(@RequestBody AttrGroupEntity attrGroup){
+    //@RequiresPermissions("product:attrgroup:update")
+    public R update(@RequestBody AttrGroupEntity attrGroup){
 		attrGroupService.updateById(attrGroup);
 
         return R.ok();
@@ -76,7 +80,8 @@ public class AttrGroupController {
      * 删除
      */
     @RequestMapping("/delete")
-        public R delete(@RequestBody Long[] attrGroupIds){
+    //@RequiresPermissions("product:attrgroup:delete")
+    public R delete(@RequestBody Long[] attrGroupIds){
 		attrGroupService.removeByIds(Arrays.asList(attrGroupIds));
 
         return R.ok();
