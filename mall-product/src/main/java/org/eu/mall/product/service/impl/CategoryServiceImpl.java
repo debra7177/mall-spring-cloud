@@ -2,8 +2,11 @@ package org.eu.mall.product.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -31,6 +34,28 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     @Override
     public List<CategoryEntity> listWithTree() {
         List<CategoryEntity> entities = baseMapper.selectList(null);
-        return entities;
+        List<CategoryEntity> collect = entities.stream()
+                .filter(categoryEntity -> categoryEntity.getParentCid() == 0)
+                .map(item -> {
+                    item.setChildren(getChildren(item, entities));
+                    return item;
+                })
+                .sorted((menu1, menu2) -> (menu1.getSort() == null ? 0 : menu1.getSort())
+                        - (menu2.getSort() == null ? 0 : menu2.getSort()))
+                .collect(Collectors.toList());
+        return collect;
+    }
+
+    private List<CategoryEntity> getChildren(CategoryEntity item, List<CategoryEntity> entitiesAll) {
+        List<CategoryEntity> collect = entitiesAll.stream()
+                .filter(categoryEntity -> categoryEntity.getParentCid() == item.getCatId())
+                .map(categoryEntity -> {
+                    categoryEntity.setChildren(getChildren(categoryEntity, entitiesAll));
+                    return categoryEntity;
+                })
+                .sorted(Comparator.comparingInt(categoryEntity ->
+                        (categoryEntity.getSort() == null ? 0 : categoryEntity.getSort())))
+                .collect(Collectors.toList());
+        return collect;
     }
 }

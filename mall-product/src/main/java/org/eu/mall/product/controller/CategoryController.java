@@ -33,7 +33,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * 列表
+     * 查询所有分类以及子分类 以树形结构展示
      */
     @RequestMapping("/list/tree")
     //@RequiresPermissions("product:category:list")
