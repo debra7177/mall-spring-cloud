@@ -6,7 +6,7 @@
  * 版权所有，侵权必究！
  */
 
-package io.renren.modules.sys.jwt;
+package io.renren.modules.sys.oauth2;
 
 import io.renren.common.exception.RRException;
 

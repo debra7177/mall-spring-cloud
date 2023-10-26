@@ -6,7 +6,7 @@
  * 版权所有，侵权必究！
  */
 
-package io.renren.modules.sys.jwt;
+package io.renren.modules.sys.oauth2;
 
 import com.google.gson.Gson;
 import io.renren.common.utils.HttpContextUtils;
@@ -25,11 +25,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * jwt token过滤器
+ * oauth2过滤器
  *
  * @author Mark sunlightcs@gmail.com
  */
-public class JWTFilter extends AuthenticatingFilter {
+public class OAuth2Filter extends AuthenticatingFilter {
 
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) throws Exception {
@@ -40,7 +40,7 @@ public class JWTFilter extends AuthenticatingFilter {
             return null;
         }
 
-        return new JWTToken(token);
+        return new OAuth2Token(token);
     }
 
     @Override

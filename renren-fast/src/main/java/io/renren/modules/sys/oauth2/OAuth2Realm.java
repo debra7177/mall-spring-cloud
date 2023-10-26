@@ -6,7 +6,7 @@
  * 版权所有，侵权必究！
  */
 
-package io.renren.modules.sys.jwt;
+package io.renren.modules.sys.oauth2;
 
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.entity.SysUserTokenEntity;
@@ -27,13 +27,13 @@ import java.util.Set;
  * @author Mark sunlightcs@gmail.com
  */
 @Component
-public class JWTRealm extends AuthorizingRealm {
+public class OAuth2Realm extends AuthorizingRealm {
     @Autowired
     private ShiroService shiroService;
 
     @Override
     public boolean supports(AuthenticationToken token) {
-        return token instanceof JWTToken;
+        return token instanceof OAuth2Token;
     }
 
     /**
