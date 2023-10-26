@@ -46,6 +46,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return collect;
     }
 
+    // 递归分类category
     private List<CategoryEntity> getChildren(CategoryEntity item, List<CategoryEntity> entitiesAll) {
         List<CategoryEntity> collect = entitiesAll.stream()
                 .filter(categoryEntity -> categoryEntity.getParentCid() == item.getCatId())
