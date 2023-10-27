@@ -14,42 +14,42 @@ spring:
 
 
         - id: product_route
-          uri: lb://gulimall-product
+          uri: lb://mall-product
           predicates:
             - Path=/api/product/**,/hello
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: coupon_route
-          uri: lb://gulimall-coupon
+          uri: lb://mall-coupon
           predicates:
             - Path=/api/coupon/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: third_party_route
-          uri: lb://gulimall-third-party
+          uri: lb://mall-third-party
           predicates:
             - Path=/api/thirdparty/**
           filters:
             - RewritePath=/api/thirdparty/(?<segment>.*),/$\{segment}
 
         - id: member_route
-          uri: lb://gulimall-member
+          uri: lb://mall-member
           predicates:
             - Path=/api/member/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: ware_route
-          uri: lb://gulimall-ware
+          uri: lb://mall-ware
           predicates:
             - Path=/api/ware/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: order_route
-          uri: lb://gulimall-order
+          uri: lb://mall-order
           predicates:
             - Path=/api/order/**
           filters:
@@ -63,39 +63,46 @@ spring:
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
 
         - id: gulimall_host_route
-          uri: lb://gulimall-product
+          uri: lb://mall-product
           predicates:
-            - Host=gulimall.com,item.gulimall.com
+            - Host=vmake.eu.org,item.vmake.eu.org
 
         - id: gulimall_search_route
-          uri: lb://gulimall-search
+          uri: lb://mall-search
           predicates:
             - Host=search.gulimall.com
         - id: gulimall_auth_route
-          uri: lb://gulimall-auth-server
+          uri: lb://mall-auth-server
           predicates:
             - Host=auth.vmake.eu.org
 
         - id: gulimall_cart_route
-          uri: lb://gulimall-cart
+          uri: lb://mall-cart
           predicates:
             - Host=cart.vmake.eu.org
 
         - id: gulimall_order_route
-          uri: lb://gulimall-order
+          uri: lb://mall-order
           predicates:
             - Host=order.vmake.eu.org
 
         - id: gulimall_member_route
-          uri: lb://gulimall-member
+          uri: lb://mall-member
           predicates:
             - Host=member.vmake.eu.org
 
         - id: gulimall_seckill_route
-          uri: lb://gulimall-seckill
+          uri: lb://mall-seckill
           predicates:
             - Host=seckill.vmake.eu.org
 
 ## 前端项目，/api
 ## http://localhost:88/api/captcha.jpg   http://localhost:8080/renren-fast/captcha.jpg
 ## http://localhost:88/api/product/category/list/tree http://localhost:10000/product/category/list/tree
+#  - id: admin_route
+#      uri: lb://renren-fast  负载均衡
+#      predicates:            断言
+#        - Path=/api/**
+#      filters:               路由重写 /api/(?<segment>.*) => /renren-fast/$\{segment}  segment片段
+#        - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+#       http://localhost:88/api/captcha.jpg =>  http://localhost:8080/renren-fast/captcha.jpg

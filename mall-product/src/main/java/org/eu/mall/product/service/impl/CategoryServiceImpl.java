@@ -59,4 +59,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
                 .collect(Collectors.toList());
         return collect;
     }
+
+    @Override
+    public void removeCategoryByIds(List<Long> catIds) {
+        //TODO  1、检查当前删除的菜单，是否被别的地方引用
+
+        baseMapper.deleteBatchIds(catIds);
+    }
+
 }
