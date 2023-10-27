@@ -26,4 +26,8 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
         return new PageUtils(page);
     }
 
+    @Override
+    public void updateCategory(Long catId, String name) {
+        baseMapper.updateCategory(catId, name);
+    }
 }

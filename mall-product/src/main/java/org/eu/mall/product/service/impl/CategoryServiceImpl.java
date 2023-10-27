@@ -1,5 +1,7 @@
 package org.eu.mall.product.service.impl;
 
+import org.eu.mall.product.service.CategoryBrandRelationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -16,10 +18,14 @@ import org.eu.common.utils.Query;
 import org.eu.mall.product.dao.CategoryDao;
 import org.eu.mall.product.entity.CategoryEntity;
 import org.eu.mall.product.service.CategoryService;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
+
+    @Autowired
+    private CategoryBrandRelationService categoryBrandRelationService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -67,4 +73,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         baseMapper.deleteBatchIds(catIds);
     }
 
+    @Override
+    @Transactional
+    public void updateCascade(CategoryEntity category) {
+        // 更新category
+        this.updateById(category);
+        categoryBrandRelationService.updateCategory(category.getCatId(), category.getName());
+    }
 }
