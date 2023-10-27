@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.102:8848
+    alicloud:
+      access-key: LTAI5tFz6amtfHsgRFv7w4WV
+      secret-key: xX5A5Aqe2qlfeekMtM8R2kzde8fInr
+      oss:
+        endpoint: oss-cn-guangzhou.aliyuncs.com
+        bucket: guanzhuo-vod-project
+  application:
+    name: mall-third-party
+server:
+  port: 30000
