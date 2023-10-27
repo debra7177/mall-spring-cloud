@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 import org.eu.common.valid.AddGroup;
+import org.eu.common.valid.ListValue;
 import org.eu.common.valid.UpdateGroup;
 import org.hibernate.validator.constraints.URL;
 
@@ -49,6 +50,7 @@ public class BrandEntity implements Serializable {
 	/**
 	 * 显示状态[0-不显示；1-显示]
 	 */
+	@ListValue(values = {0, 1}, groups = {AddGroup.class})
 	private Integer showStatus;
 	/**
 	 * 检索首字母
