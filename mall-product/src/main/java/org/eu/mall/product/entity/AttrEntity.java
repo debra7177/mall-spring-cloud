@@ -1,5 +1,6 @@
 package org.eu.mall.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -9,7 +10,7 @@ import lombok.Data;
 
 /**
  * 商品属性
- * 
+ *
  * @author kevin
  * @email drzhong2015@gmail.com
  * @date 2023-10-27 00:34:58
@@ -61,4 +62,10 @@ public class AttrEntity implements Serializable {
 	 */
 	private Integer showDesc;
 
+	/**
+	 * 属性分组id
+	 */
+	// 不规范 使用PO 持久对象
+	//@TableField(exist = false)
+	//private Long attrGroupId;
 }
