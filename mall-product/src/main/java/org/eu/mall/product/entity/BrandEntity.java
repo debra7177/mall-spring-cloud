@@ -9,6 +9,7 @@ import lombok.Data;
 import org.eu.common.valid.AddGroup;
 import org.eu.common.valid.ListValue;
 import org.eu.common.valid.UpdateGroup;
+import org.eu.common.valid.UpdateStatusGroup;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.*;
@@ -50,13 +51,14 @@ public class BrandEntity implements Serializable {
 	/**
 	 * 显示状态[0-不显示；1-显示]
 	 */
-	@ListValue(values = {0, 1}, groups = {AddGroup.class})
+	@NotNull(groups = {AddGroup.class, UpdateStatusGroup.class})
+	@ListValue(values = {0, 1}, groups = {AddGroup.class, UpdateStatusGroup.class})
 	private Integer showStatus;
 	/**
 	 * 检索首字母
 	 */
 	@NotEmpty(groups = {AddGroup.class})
-	@Pattern(regexp = "/^[a-zA-Z]$/", message = "检索字符必须是一个字母", groups = {AddGroup.class, UpdateGroup.class})
+	@Pattern(regexp = "^[a-zA-Z]$", message = "检索字符必须是一个字母", groups = {AddGroup.class, UpdateGroup.class})
 	private String firstLetter;
 	/**
 	 * 排序
