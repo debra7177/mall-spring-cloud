@@ -71,6 +71,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         baseMapper.deleteBatchIds(catIds);
     }
 
+    /**
+     * 级联更新所有关联的数据
+     *
+     * @param category
+     */
     @Override
     @Transactional
     public void updateCascade(CategoryEntity category) {
