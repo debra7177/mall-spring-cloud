@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 
+import org.eu.mall.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,25 +32,34 @@ public class AttrGroupController {
     @Autowired
     private AttrGroupService attrGroupService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/{cateLogId}")
     //@RequiresPermissions("product:attrgroup:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = attrGroupService.queryPage(params);
+    public R list(@RequestParam Map<String, Object> params, @PathVariable("cateLogId") long cateLogId){
+        //PageUtils page = attrGroupService.queryPage(params);
+
+        PageUtils page = attrGroupService.queryPage(params, cateLogId);
 
         return R.ok().put("page", page);
     }
 
 
     /**
-     * 信息
+     * 信息  属性分组修改页面回显
      */
     @RequestMapping("/info/{attrGroupId}")
     //@RequiresPermissions("product:attrgroup:info")
     public R info(@PathVariable("attrGroupId") Long attrGroupId){
 		AttrGroupEntity attrGroup = attrGroupService.getById(attrGroupId);
+
+        Long catelogId = attrGroup.getCatelogId();
+        Long[] path = categoryService.findCatelogPath(catelogId);
+        attrGroup.setCatelogPath(path);
 
         return R.ok().put("attrGroup", attrGroup);
     }
