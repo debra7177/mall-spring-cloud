@@ -7,6 +7,7 @@ import org.eu.mall.product.vo.AttrGroupRelationVo;
 import org.eu.mall.product.vo.AttrResponseVo;
 import org.eu.mall.product.vo.AttrVo;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -56,5 +57,7 @@ public interface AttrService extends IService<AttrEntity> {
      * @param vos
      */
     void deleteRelation(AttrGroupRelationVo[] vos);
+
+    PageUtils getNoRelationAttr(Map<String, Object> params, Long attrGroupId);
 }
 

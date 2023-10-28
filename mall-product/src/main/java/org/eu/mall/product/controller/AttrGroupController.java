@@ -97,6 +97,17 @@ public class AttrGroupController {
     }
 
     /**
+     * 属性分组 可以关联的基本属性列表
+     */
+    @GetMapping("/{attrGroupId}/noattr/relation")
+    public R attrNoRelation(@PathVariable("attrGroupId") Long attrGroupId,
+                            @RequestParam Map<String, Object> params) {
+        PageUtils page = attrService.getNoRelationAttr(params, attrGroupId);
+
+        return R.ok().put("page", page);
+    }
+
+    /**
      * 修改
      */
     @RequestMapping("/update")
