@@ -14,6 +14,9 @@ public class AttrResponseVo extends AttrVo {
      */
     private String groupName;
 
-
+    /**
+     * 分类路径 [2, 34, 225]
+     */
+    private Long[] catelogPath;
 
 }

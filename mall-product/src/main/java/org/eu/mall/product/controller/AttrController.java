@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 
+import org.eu.mall.product.vo.AttrResponseVo;
 import org.eu.mall.product.vo.AttrVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,9 +62,9 @@ public class AttrController {
     @RequestMapping("/info/{attrId}")
     //@RequiresPermissions("product:attr:info")
     public R info(@PathVariable("attrId") Long attrId){
-		AttrEntity attr = attrService.getById(attrId);
-
-        return R.ok().put("attr", attr);
+		//AttrEntity attr = attrService.getById(attrId);
+        AttrResponseVo attrInfo = attrService.getAttrInfo(attrId);
+        return R.ok().put("attr", attrInfo);
     }
 
     /**
