@@ -132,4 +132,26 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
         return attrResponseVo;
     }
+
+    // 更新规格参数
+    @Transactional
+    @Override
+    public void updateAttr(AttrVo attr) {
+        AttrEntity attrEntity = new AttrEntity();
+        BeanUtils.copyProperties(attr, attrEntity);
+
+        this.updateById(attrEntity);
+
+        // 更新属性 - 属性分组关联关系
+        AttrAttrgroupRelationEntity relationEntity = new AttrAttrgroupRelationEntity();
+        relationEntity.setAttrGroupId(attr.getAttrGroupId());
+        relationEntity.setAttrId(attr.getAttrId());
+
+        int count = attrAttrgroupRelationService.count(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id", attr.getAttrId()));
+        if (count > 0) {
+            attrAttrgroupRelationService.update(relationEntity, new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id", attr.getAttrId()));
+        }else {
+            attrAttrgroupRelationService.save(relationEntity);
+        }
+    }
 }
