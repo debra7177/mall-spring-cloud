@@ -38,9 +38,10 @@ public interface AttrService extends IService<AttrEntity> {
      *
      * @param params    the params
      * @param catelogId the catelog id
+     * @param type
      * @return the page utils
      */
-    PageUtils queryBaseAttrPage(Map<String, Object> params, Long catelogId);
+    PageUtils queryBaseAttrPage(Map<String, Object> params, Long catelogId, String type);
 
     AttrResponseVo getAttrInfo(Long attrId);
 
