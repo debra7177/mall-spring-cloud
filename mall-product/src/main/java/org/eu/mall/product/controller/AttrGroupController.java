@@ -1,16 +1,15 @@
 package org.eu.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
+import org.eu.mall.product.entity.AttrEntity;
+import org.eu.mall.product.service.AttrService;
 import org.eu.mall.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.eu.mall.product.entity.AttrGroupEntity;
 import org.eu.mall.product.service.AttrGroupService;
@@ -34,6 +33,18 @@ public class AttrGroupController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private AttrService attrService;
+
+    /**
+     * 根据 属性分组id查询所有 关联的属性
+     */
+    @GetMapping("/{attrGroupId}/attr/relation")
+    public R attrRelation(@PathVariable("attrGroupId") Long attrGroupId) {
+        List<AttrEntity> attrEntities = attrService.getRelationAttr(attrGroupId);
+        return R.ok().put("data", attrEntities);
+    }
 
     /**
      * 列表

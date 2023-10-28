@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,6 +42,9 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
     @Autowired
     private AttrGroupService attrGroupService;
+
+    @Autowired
+    private AttrService attrService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -165,5 +169,21 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
                 attrAttrgroupRelationService.save(relationEntity);
             }
         }
+    }
+
+    /**
+     * 根据 属性分组id 查询关联是所有基本属性
+     * @param attrGroupId 属性分组id
+     * @return 基本属性列表
+     */
+    @Override
+    public List<AttrEntity> getRelationAttr(Long attrGroupId) {
+        List<AttrAttrgroupRelationEntity> relationEntities = attrAttrgroupRelationService.list(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId));
+        if (relationEntities != null && relationEntities.size() > 0) {
+            return relationEntities.stream()
+                    .map(entity -> attrService.getById(entity.getAttrId()))
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 }

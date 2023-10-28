@@ -6,6 +6,7 @@ import org.eu.mall.product.entity.AttrEntity;
 import org.eu.mall.product.vo.AttrResponseVo;
 import org.eu.mall.product.vo.AttrVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,5 +47,7 @@ public interface AttrService extends IService<AttrEntity> {
     AttrResponseVo getAttrInfo(Long attrId);
 
     void updateAttr(AttrVo attr);
+
+    List<AttrEntity> getRelationAttr(Long attrGroupId);
 }
 
