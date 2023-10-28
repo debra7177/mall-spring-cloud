@@ -8,6 +8,7 @@ import java.util.Map;
 import org.eu.mall.product.entity.AttrEntity;
 import org.eu.mall.product.service.AttrService;
 import org.eu.mall.product.service.CategoryService;
+import org.eu.mall.product.vo.AttrGroupRelationVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,6 +84,15 @@ public class AttrGroupController {
     public R save(@RequestBody AttrGroupEntity attrGroup){
 		attrGroupService.save(attrGroup);
 
+        return R.ok();
+    }
+
+    /**
+     * 属性 - 属性分组 关联关系删除(批量)
+     */
+    @PostMapping("/attr/relation/delete")
+    public R relationDelete(@RequestBody AttrGroupRelationVo[] vos) {
+        attrService.deleteRelation(vos);
         return R.ok();
     }
 

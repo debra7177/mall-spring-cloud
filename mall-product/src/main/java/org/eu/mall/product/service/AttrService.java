@@ -3,6 +3,7 @@ package org.eu.mall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.eu.common.utils.PageUtils;
 import org.eu.mall.product.entity.AttrEntity;
+import org.eu.mall.product.vo.AttrGroupRelationVo;
 import org.eu.mall.product.vo.AttrResponseVo;
 import org.eu.mall.product.vo.AttrVo;
 
@@ -49,5 +50,11 @@ public interface AttrService extends IService<AttrEntity> {
     void updateAttr(AttrVo attr);
 
     List<AttrEntity> getRelationAttr(Long attrGroupId);
+
+    /**
+     * 删除基本属性 - 属性分组关联关系
+     * @param vos
+     */
+    void deleteRelation(AttrGroupRelationVo[] vos);
 }
 

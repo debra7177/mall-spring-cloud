@@ -7,6 +7,7 @@ import org.eu.mall.product.entity.CategoryEntity;
 import org.eu.mall.product.service.AttrAttrgroupRelationService;
 import org.eu.mall.product.service.AttrGroupService;
 import org.eu.mall.product.service.CategoryService;
+import org.eu.mall.product.vo.AttrGroupRelationVo;
 import org.eu.mall.product.vo.AttrResponseVo;
 import org.eu.mall.product.vo.AttrVo;
 import org.springframework.beans.BeanUtils;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -185,5 +187,21 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
                     .collect(Collectors.toList());
         }
         return null;
+    }
+
+    @Override
+    public void deleteRelation(AttrGroupRelationVo[] vos) {
+        if (vos.length > 0) {
+            for (AttrGroupRelationVo vo : vos) {
+                attrAttrgroupRelationService.remove(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id", vo.getAttrId()).eq("attr_group_id", vo.getAttrGroupId()));
+            }
+        }
+        List<AttrAttrgroupRelationEntity> relationEntityList = Arrays.asList(vos).stream()
+                .map(item -> {
+                    AttrAttrgroupRelationEntity relationEntity = new AttrAttrgroupRelationEntity();
+                    BeanUtils.copyProperties(item, relationEntity);
+                    return relationEntity;
+                }).collect(Collectors.toList());
+        attrAttrgroupRelationService.deleteBatchRelation(relationEntityList);
     }
 }
