@@ -216,12 +216,12 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
         Long catelogId = attrGroupEntity.getCatelogId();
 
         // 2.当前属性分组只能关联别的分组没有引用的属性
-        // 2.1 查询当前分类下的其他属性分组
-        List<AttrGroupEntity> attrGroupEntities = attrGroupService.list(new QueryWrapper<AttrGroupEntity>().eq("catelog_id", catelogId).ne("attr_group_id", attrGroupId));
+        // 2.1 查询当前分类下的所有属性分组
+        List<AttrGroupEntity> attrGroupEntities = attrGroupService.list(new QueryWrapper<AttrGroupEntity>().eq("catelog_id", catelogId));
         List<Long> attrGroupIdList = attrGroupEntities.stream()
                 .map(AttrGroupEntity::getAttrGroupId)
                 .collect(Collectors.toList());
-        // 2.2 这些属性分组关联的属性
+        // 2.2 这些属性分组关联的属性(已经关联 需要排除attrIdSet)
         List<AttrAttrgroupRelationEntity> entityList = attrAttrgroupRelationService.list(new QueryWrapper<AttrAttrgroupRelationEntity>().in("attr_group_id", attrGroupIdList));
         Set<Long> attrIdSet = entityList.stream()
                 .map(AttrAttrgroupRelationEntity::getAttrId)
@@ -236,7 +236,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
         String key = (String) params.get("key");
         if(!StringUtils.isEmpty(key)){
             queryWrapper.and((w)->{
-                w.eq("attr_id",key).or().like("attr_name",key);
+                w.eq("attr_id", key).or().like("attr_name", key);
             });
         }
         IPage<AttrEntity> page = this.page(new Query<AttrEntity>().getPage(params), queryWrapper);
