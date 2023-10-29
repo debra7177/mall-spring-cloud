@@ -3,6 +3,7 @@ package org.eu.mall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.eu.common.utils.PageUtils;
 import org.eu.mall.product.entity.AttrAttrgroupRelationEntity;
+import org.eu.mall.product.vo.AttrGroupRelationVo;
 
 import java.util.List;
 import java.util.Map;
@@ -19,5 +20,11 @@ public interface AttrAttrgroupRelationService extends IService<AttrAttrgroupRela
     PageUtils queryPage(Map<String, Object> params);
 
     void deleteBatchRelation(List<AttrAttrgroupRelationEntity> relationEntityList);
+
+    /**
+     * 批量保存属性分组 - 属性关联关系
+     * @param vos
+     */
+    void saveBatch(List<AttrGroupRelationVo> vos);
 }
 

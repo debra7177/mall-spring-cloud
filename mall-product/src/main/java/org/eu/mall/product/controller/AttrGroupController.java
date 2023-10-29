@@ -6,6 +6,7 @@ import java.util.Map;
 
 
 import org.eu.mall.product.entity.AttrEntity;
+import org.eu.mall.product.service.AttrAttrgroupRelationService;
 import org.eu.mall.product.service.AttrService;
 import org.eu.mall.product.service.CategoryService;
 import org.eu.mall.product.vo.AttrGroupRelationVo;
@@ -37,6 +38,20 @@ public class AttrGroupController {
 
     @Autowired
     private AttrService attrService;
+
+    @Autowired
+    private AttrAttrgroupRelationService attrAttrgroupRelationService;
+
+    /**
+     * 添加属性分组 - 属性关联关系(批量)
+     *
+     * @return
+     */
+    @PostMapping("/attr/relation")
+    public R addRelation(@RequestBody List<AttrGroupRelationVo> vos) {
+        attrAttrgroupRelationService.saveBatch(vos);
+        return R.ok();
+    }
 
     /**
      * 根据 属性分组id查询所有 关联的属性
