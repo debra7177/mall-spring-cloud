@@ -1,0 +1,480 @@
+{
+  "spuName": "华为 HUAWEI Mate 30 Pro",
+  "spuDescription": "华为 HUAWEI Mate 30 Pro",
+  "catalogId": 225,
+  "brandId": 1,
+  "weight": 0.198,
+  "publishStatus": 0,
+  "decript": ["https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/864ec659-f7ff-413f-89cf-a293dd42cb87_73366cc235d68202.jpg", "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/cdac1894-5e5c-47ed-8129-0eb9604e758a_528211b97272d88a.jpg"],
+  "images": ["https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/7f9e94d8-0e20-4760-8ad1-0d0607a9f2e9_0d40c24b264aa511.jpg", "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/839fb748-b4b2-4b30-868e-28612730af99_1f15cdbcf9e1273c.jpg", "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/20236abd-e2f2-493e-8715-092261d70821_2b1837c6c50add30.jpg", "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/b9ba6ac1-fd96-451d-8e0b-53ce4e4bf29b_8bf441260bffa42f.jpg", "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/bbf1ea05-36db-498c-8e27-5af745e57bf3_23d9fbb256ea5d4a.jpg", "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/083a168d-6075-439a-8799-928ff6896763_28f296629cca865e.jpg", "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/41322f56-3350-4040-8c89-c651653d409d_73ab4d2e818d2211.jpg", "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/75ef5f24-ecb8-4e6e-87f8-8028ef3ec649_919c850652e98031.jpg"],
+  "bounds": {
+    "buyBounds": 500,
+    "growBounds": 500
+  },
+  "baseAttrs": [{
+    "attrId": 6,
+    "attrValues": "158.3",
+    "showDesc": 0
+  }, {
+    "attrId": 7,
+    "attrValues": "其他",
+    "showDesc": 0
+  }, {
+    "attrId": 1,
+    "attrValues": "LIO-AL00",
+    "showDesc": 1
+  }, {
+    "attrId": 2,
+    "attrValues": "2019",
+    "showDesc": 1
+  }, {
+    "attrId": 8,
+    "attrValues": "海思 (Hisilicon)",
+    "showDesc": 1
+  }, {
+    "attrId": 9,
+    "attrValues": "HUAWEI Kirin 980",
+    "showDesc": 1
+  }],
+  "skus": [{
+    "attr": [{
+      "attrId": 3,
+      "attrName": "颜色",
+      "attrValue": "星河银"
+    }, {
+      "attrId": 10,
+      "attrName": "版本",
+      "attrValue": "8G+128G"
+    }],
+    "skuName": "华为 HUAWEI Mate 30 Pro 星河银 8G+128G",
+    "price": "5799",
+    "skuTitle": "华为 HUAWEI Mate 30 Pro 星河银 8G+128G 麒麟990 OLED环幕屏双4000万徕卡电影四摄 4G全网通游戏手机",
+    "skuSubtitle": "40W快速充电",
+    "images": [{
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/7f9e94d8-0e20-4760-8ad1-0d0607a9f2e9_0d40c24b264aa511.jpg",
+      "defaultImg": 1
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/41322f56-3350-4040-8c89-c651653d409d_73ab4d2e818d2211.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/75ef5f24-ecb8-4e6e-87f8-8028ef3ec649_919c850652e98031.jpg",
+      "defaultImg": 0
+    }],
+    "descar": ["星河银", "8G+128G"],
+    "fullCount": 3,
+    "discount": 0.98,
+    "countStatus": 1,
+    "fullPrice": 10000,
+    "reducePrice": 50,
+    "priceStatus": 1,
+    "memberPrice": [{
+      "id": 2,
+      "name": "铜牌会员",
+      "price": 5699
+    }, {
+      "id": 3,
+      "name": "银牌会员",
+      "price": 5599
+    }]
+  }, {
+    "attr": [{
+      "attrId": 3,
+      "attrName": "颜色",
+      "attrValue": "星河银"
+    }, {
+      "attrId": 10,
+      "attrName": "版本",
+      "attrValue": "8G+256G"
+    }],
+    "skuName": "华为 HUAWEI Mate 30 Pro 星河银 8G+256G",
+    "price": "6299",
+    "skuTitle": "华为 HUAWEI Mate 30 Pro 星河银 8G+256G 麒麟990 OLED环幕屏双4000万徕卡电影四摄 4G全网通游戏手机",
+    "skuSubtitle": "40W快速充电",
+    "images": [{
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/7f9e94d8-0e20-4760-8ad1-0d0607a9f2e9_0d40c24b264aa511.jpg",
+      "defaultImg": 1
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/41322f56-3350-4040-8c89-c651653d409d_73ab4d2e818d2211.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/75ef5f24-ecb8-4e6e-87f8-8028ef3ec649_919c850652e98031.jpg",
+      "defaultImg": 0
+    }],
+    "descar": ["星河银", "8G+256G"],
+    "fullCount": 3,
+    "discount": 0.98,
+    "countStatus": 1,
+    "fullPrice": 10000,
+    "reducePrice": 50,
+    "priceStatus": 1,
+    "memberPrice": [{
+      "id": 2,
+      "name": "铜牌会员",
+      "price": 6259
+    }, {
+      "id": 3,
+      "name": "银牌会员",
+      "price": 6219
+    }]
+  }, {
+    "attr": [{
+      "attrId": 3,
+      "attrName": "颜色",
+      "attrValue": "亮黑色"
+    }, {
+      "attrId": 10,
+      "attrName": "版本",
+      "attrValue": "8G+128G"
+    }],
+    "skuName": "华为 HUAWEI Mate 30 Pro 亮黑色 8G+128G",
+    "price": "5799",
+    "skuTitle": "华为 HUAWEI Mate 30 Pro 亮黑色 8G+128G 麒麟990 OLED环幕屏双4000万徕卡电影四摄 4G全网通游戏手机",
+    "skuSubtitle": "40W快速充电",
+    "images": [{
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/7f9e94d8-0e20-4760-8ad1-0d0607a9f2e9_0d40c24b264aa511.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/b9ba6ac1-fd96-451d-8e0b-53ce4e4bf29b_8bf441260bffa42f.jpg",
+      "defaultImg": 1
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/083a168d-6075-439a-8799-928ff6896763_28f296629cca865e.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }],
+    "descar": ["亮黑色", "8G+128G"],
+    "fullCount": 3,
+    "discount": 0.98,
+    "countStatus": 1,
+    "fullPrice": 10000,
+    "reducePrice": 50,
+    "priceStatus": 1,
+    "memberPrice": [{
+      "id": 2,
+      "name": "铜牌会员",
+      "price": 5699
+    }, {
+      "id": 3,
+      "name": "银牌会员",
+      "price": 5599
+    }]
+  }, {
+    "attr": [{
+      "attrId": 3,
+      "attrName": "颜色",
+      "attrValue": "亮黑色"
+    }, {
+      "attrId": 10,
+      "attrName": "版本",
+      "attrValue": "8G+256G"
+    }],
+    "skuName": "华为 HUAWEI Mate 30 Pro 亮黑色 8G+256G",
+    "price": "6299",
+    "skuTitle": "华为 HUAWEI Mate 30 Pro 亮黑色 8G+256G 麒麟990 OLED环幕屏双4000万徕卡电影四摄 4G全网通游戏手机",
+    "skuSubtitle": "40W快速充电",
+    "images": [{
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/7f9e94d8-0e20-4760-8ad1-0d0607a9f2e9_0d40c24b264aa511.jpg",
+      "defaultImg": 1
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/b9ba6ac1-fd96-451d-8e0b-53ce4e4bf29b_8bf441260bffa42f.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/083a168d-6075-439a-8799-928ff6896763_28f296629cca865e.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }],
+    "descar": ["亮黑色", "8G+256G"],
+    "fullCount": 3,
+    "discount": 0.98,
+    "countStatus": 1,
+    "fullPrice": 10000,
+    "reducePrice": 50,
+    "priceStatus": 1,
+    "memberPrice": [{
+      "id": 2,
+      "name": "铜牌会员",
+      "price": 6259
+    }, {
+      "id": 3,
+      "name": "银牌会员",
+      "price": 6219
+    }]
+  }, {
+    "attr": [{
+      "attrId": 3,
+      "attrName": "颜色",
+      "attrValue": "翡冷翠"
+    }, {
+      "attrId": 10,
+      "attrName": "版本",
+      "attrValue": "8G+128G"
+    }],
+    "skuName": "华为 HUAWEI Mate 30 Pro 翡冷翠 8G+128G",
+    "price": "5799",
+    "skuTitle": "华为 HUAWEI Mate 30 Pro 翡冷翠 8G+128G 麒麟990 OLED环幕屏双4000万徕卡电影四摄 4G全网通游戏手机",
+    "skuSubtitle": "40W快速充电",
+    "images": [{
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/7f9e94d8-0e20-4760-8ad1-0d0607a9f2e9_0d40c24b264aa511.jpg",
+      "defaultImg": 1
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/20236abd-e2f2-493e-8715-092261d70821_2b1837c6c50add30.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/bbf1ea05-36db-498c-8e27-5af745e57bf3_23d9fbb256ea5d4a.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }],
+    "descar": ["翡冷翠", "8G+128G"],
+    "fullCount": 3,
+    "discount": 0.98,
+    "countStatus": 1,
+    "fullPrice": 10000,
+    "reducePrice": 50,
+    "priceStatus": 1,
+    "memberPrice": [{
+      "id": 2,
+      "name": "铜牌会员",
+      "price": 5699
+    }, {
+      "id": 3,
+      "name": "银牌会员",
+      "price": 5599
+    }]
+  }, {
+    "attr": [{
+      "attrId": 3,
+      "attrName": "颜色",
+      "attrValue": "翡冷翠"
+    }, {
+      "attrId": 10,
+      "attrName": "版本",
+      "attrValue": "8G+256G"
+    }],
+    "skuName": "华为 HUAWEI Mate 30 Pro 翡冷翠 8G+256G",
+    "price": "6299",
+    "skuTitle": "华为 HUAWEI Mate 30 Pro 翡冷翠 8G+256G 麒麟990 OLED环幕屏双4000万徕卡电影四摄 4G全网通游戏手机",
+    "skuSubtitle": "40W快速充电",
+    "images": [{
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/7f9e94d8-0e20-4760-8ad1-0d0607a9f2e9_0d40c24b264aa511.jpg",
+      "defaultImg": 1
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/20236abd-e2f2-493e-8715-092261d70821_2b1837c6c50add30.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/bbf1ea05-36db-498c-8e27-5af745e57bf3_23d9fbb256ea5d4a.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }],
+    "descar": ["翡冷翠", "8G+256G"],
+    "fullCount": 3,
+    "discount": 0.98,
+    "countStatus": 1,
+    "fullPrice": 10000,
+    "reducePrice": 50,
+    "priceStatus": 1,
+    "memberPrice": [{
+      "id": 2,
+      "name": "铜牌会员",
+      "price": 6259
+    }, {
+      "id": 3,
+      "name": "银牌会员",
+      "price": 6219
+    }]
+  }, {
+    "attr": [{
+      "attrId": 3,
+      "attrName": "颜色",
+      "attrValue": "罗兰紫"
+    }, {
+      "attrId": 10,
+      "attrName": "版本",
+      "attrValue": "8G+128G"
+    }],
+    "skuName": "华为 HUAWEI Mate 30 Pro 罗兰紫 8G+128G",
+    "price": "5799",
+    "skuTitle": "华为 HUAWEI Mate 30 Pro 罗兰紫 8G+128G 麒麟990 OLED环幕屏双4000万徕卡电影四摄 4G全网通游戏手机",
+    "skuSubtitle": "40W快速充电",
+    "images": [{
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/7f9e94d8-0e20-4760-8ad1-0d0607a9f2e9_0d40c24b264aa511.jpg",
+      "defaultImg": 1
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/20236abd-e2f2-493e-8715-092261d70821_2b1837c6c50add30.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/bbf1ea05-36db-498c-8e27-5af745e57bf3_23d9fbb256ea5d4a.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }],
+    "descar": ["罗兰紫", "8G+128G"],
+    "fullCount": 3,
+    "discount": 0.98,
+    "countStatus": 1,
+    "fullPrice": 10000,
+    "reducePrice": 50,
+    "priceStatus": 1,
+    "memberPrice": [{
+      "id": 2,
+      "name": "铜牌会员",
+      "price": 5699
+    }, {
+      "id": 3,
+      "name": "银牌会员",
+      "price": 5599
+    }]
+  }, {
+    "attr": [{
+      "attrId": 3,
+      "attrName": "颜色",
+      "attrValue": "罗兰紫"
+    }, {
+      "attrId": 10,
+      "attrName": "版本",
+      "attrValue": "8G+256G"
+    }],
+    "skuName": "华为 HUAWEI Mate 30 Pro 罗兰紫 8G+256G",
+    "price": "6299",
+    "skuTitle": "华为 HUAWEI Mate 30 Pro 罗兰紫 8G+256G 麒麟990 OLED环幕屏双4000万徕卡电影四摄 4G全网通游戏手机",
+    "skuSubtitle": "40W快速充电",
+    "images": [{
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/7f9e94d8-0e20-4760-8ad1-0d0607a9f2e9_0d40c24b264aa511.jpg",
+      "defaultImg": 1
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/20236abd-e2f2-493e-8715-092261d70821_2b1837c6c50add30.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "https://guanzhuo-vod-project.oss-cn-guangzhou.aliyuncs.com/2023-10-30/bbf1ea05-36db-498c-8e27-5af745e57bf3_23d9fbb256ea5d4a.jpg",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }, {
+      "imgUrl": "",
+      "defaultImg": 0
+    }],
+    "descar": ["罗兰紫", "8G+256G"],
+    "fullCount": 3,
+    "discount": 0.98,
+    "countStatus": 1,
+    "fullPrice": 10000,
+    "reducePrice": 50,
+    "priceStatus": 1,
+    "memberPrice": [{
+      "id": 2,
+      "name": "铜牌会员",
+      "price": 6259
+    }, {
+      "id": 3,
+      "name": "银牌会员",
+      "price": 6219
+    }]
+  }]
+}

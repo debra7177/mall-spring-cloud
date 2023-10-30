@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 
+import org.eu.mall.product.service.SpuInfoService;
+import org.eu.mall.product.vo.SpuSaveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +32,9 @@ import org.eu.common.utils.R;
 public class SkuInfoController {
     @Autowired
     private SkuInfoService skuInfoService;
+
+    @Autowired
+    private SpuInfoService spuInfoService;
 
     /**
      * 列表
@@ -59,8 +64,9 @@ public class SkuInfoController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("product:skuinfo:save")
-    public R save(@RequestBody SkuInfoEntity skuInfo){
-		skuInfoService.save(skuInfo);
+    public R save(@RequestBody SpuSaveVo vo){
+		//skuInfoService.save(skuInfo);
+        spuInfoService.saveSpuInfo(vo);
 
         return R.ok();
     }
