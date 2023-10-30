@@ -116,7 +116,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             skus.forEach(item -> {
                 String defaultImage = "";
                 for (Images image : item.getImages()) {
-                    defaultImage = image.getImgUrl();
+                    if (!StringUtils.isEmpty(image.getImgUrl()) && image.getDefaultImg() == 1) {
+                        defaultImage = image.getImgUrl();
+                    }
                 }
                 //private String skuName;
                 //private BigDecimal price;
@@ -176,5 +178,40 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
     @Override
     public void saveBaseSpuInfo(SpuInfoEntity spuInfoEntity) {
         save(spuInfoEntity);
+    }
+
+    @Override
+    public PageUtils queryPageByCondition(Map<String, Object> params) {
+        QueryWrapper<SpuInfoEntity> queryWrapper = new QueryWrapper<>();
+        /**
+         * status: 2
+         * key:
+         * brandId:9
+         * catelogId: 225
+         */
+        String key = (String) params.get("key");
+        if (StringUtils.isEmpty(key)) {
+            queryWrapper.and(w -> {
+                w.eq("id", key).or().like("spu_name", key);
+            });
+        }
+        String status = (String) params.get("status");
+        if (!StringUtils.isEmpty(status)) {
+            queryWrapper.eq("publish_status", status);
+        }
+        String brandId = (String) params.get("brandId");
+        if (!StringUtils.isEmpty(brandId)) {
+            queryWrapper.eq("brand_id", brandId);
+        }
+        String catelogId = (String) params.get("catelogId");
+        if (!StringUtils.isEmpty(brandId)) {
+            queryWrapper.eq("catalog_id", catelogId);
+        }
+        IPage<SpuInfoEntity> page = this.page(
+                new Query<SpuInfoEntity>().getPage(params),
+                queryWrapper
+        );
+
+        return new PageUtils(page);
     }
 }

@@ -11,4 +11,7 @@
 ```bash
 /device/workspace/JAVA-BIG-PROJECT/Spring-Boot/nacos/bin/startup.sh -m standalone
 ```
-
+设置当前会话mysql数据库隔离级别为读未提交(debug时使用)
+```sql
+set session transaction isolation level read uncommitted 
+```
