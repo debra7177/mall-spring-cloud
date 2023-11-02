@@ -36,7 +36,7 @@ public class AttrController {
     private ProductAttrValueService productAttrValueService;
 
     /**
-     * 获取spu规格
+     * spu管理 - 规格维护 获取spu规格
      */
     @GetMapping("/base/listforspu/{spuId}")
     public R baseAttrListForSpu(@PathVariable("spuId") Long spuId) {
@@ -99,6 +99,19 @@ public class AttrController {
     public R update(@RequestBody AttrVo attr){
 		attrService.updateAttr(attr);
 
+        return R.ok();
+    }
+
+    /**
+     * spu管理 - 规格维护 修改商品规格
+     * @param spuId
+     * @param entities
+     * @return
+     */
+    @PostMapping("/update/{spuId}")
+    public R updateSpuAttr(@PathVariable("spuId") Long spuId,
+                           @RequestBody List<ProductAttrValueEntity> entities) {
+        productAttrValueService.updateSpuAttr(spuId, entities);
         return R.ok();
     }
 
