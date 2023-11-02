@@ -1,17 +1,16 @@
 package org.eu.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
+import org.eu.mall.product.entity.ProductAttrValueEntity;
+import org.eu.mall.product.service.ProductAttrValueService;
 import org.eu.mall.product.vo.AttrResponseVo;
 import org.eu.mall.product.vo.AttrVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.eu.mall.product.entity.AttrEntity;
 import org.eu.mall.product.service.AttrService;
@@ -32,6 +31,18 @@ import org.eu.common.utils.R;
 public class AttrController {
     @Autowired
     private AttrService attrService;
+
+    @Autowired
+    private ProductAttrValueService productAttrValueService;
+
+    /**
+     * 获取spu规格
+     */
+    @GetMapping("/base/listforspu/{spuId}")
+    public R baseAttrListForSpu(@PathVariable("spuId") Long spuId) {
+        List<ProductAttrValueEntity> productAttrValueEntities = productAttrValueService.baseAttrListForSpu(spuId);
+        return R.ok().put("data", productAttrValueEntities);
+    }
 
     /**
      * 列表
