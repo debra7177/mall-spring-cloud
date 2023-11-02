@@ -1,5 +1,7 @@
 package org.eu.mall.ware.service.impl;
 
+import org.eu.common.utils.R;
+import org.eu.mall.ware.feign.ProductFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
 
     @Autowired
     private WareSkuDao wareSkuDao;
+
+    @Autowired
+    private ProductFeignService productFeignService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -54,6 +59,21 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             wareSkuEntity.setSkuId(skuId);
             wareSkuEntity.setStock(skuNum);
             wareSkuEntity.setWareId(wareId);
+            wareSkuEntity.setStockLocked(0);
+            // 查询skuName
+            // 如果失败 整个事务无需回滚 自己catch异常
+            // todo 其他方式
+            try {
+                R info = productFeignService.info(skuId);
+                Map<String, Object> data = (Map<String, Object>) info.get("skuInfo");
+                if (info.getCode() == 0) {
+                    wareSkuEntity.setSkuName((String) data.get("skuName"));
+
+                }
+            } catch (Exception e) {
+
+            }
+
             save(wareSkuEntity);
         }else {
             wareSkuDao.addStock(skuId, wareId, skuNum);
