@@ -62,6 +62,12 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseDao, PurchaseEntity
             save(purchaseEntity);
             purchaseId = purchaseEntity.getId();
         }
+        // 确认采购单状态是0或者1才可以合并
+        PurchaseEntity getById = getById(purchaseId);
+        if (!getById.getStatus().equals(WareConstant.PurchaseStatusEnum.CREATED.getCode())
+                && !getById.getStatus().equals(WareConstant.PurchaseStatusEnum.ASSIGNED.getCode())) {
+            return;
+        }
         List<Long> items = mergeVo.getItems();
         Long finalPurchaseId = purchaseId;
         List<PurchaseDetailEntity> collect = items.stream()
@@ -77,5 +83,34 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseDao, PurchaseEntity
         purchaseEntity.setId(purchaseId);
         purchaseEntity.setUpdateTime(new Date());
         updateById(purchaseEntity);
+    }
+
+    @Override
+    public void received(List<Long> ids) {
+        // 确认当前采购单是新建或者已分配状态
+        List<PurchaseEntity> collect = ids.stream()
+                .map(this::getById).filter(item -> {
+                    return item.getStatus() == WareConstant.PurchaseStatusEnum.CREATED.getCode() || item.getStatus() == WareConstant.PurchaseStatusEnum.ASSIGNED.getCode();
+                }).map(item -> {
+                    item.setStatus(WareConstant.PurchaseStatusEnum.RECEIVE.getCode());
+                    item.setUpdateTime(new Date());
+                    return item;
+                }).collect(Collectors.toList());
+        // 改变采购单的状态
+        if (collect.size() > 0) {
+            updateBatchById(collect);
+        }
+        // 改变采购项的状态
+        collect.forEach(item ->{
+            List<PurchaseDetailEntity> entities = purchaseDetailService.listDetailByPurchaseId(item.getId());
+            List<PurchaseDetailEntity> detailEntities = entities.stream()
+                    .map(entity -> {
+                        PurchaseDetailEntity purchaseDetailEntity = new PurchaseDetailEntity();
+                        purchaseDetailEntity.setId(entity.getId());
+                        purchaseDetailEntity.setStatus(WareConstant.PurchaseDetailStatusEnum.BUYING.getCode());
+                        return purchaseDetailEntity;
+                    }).collect(Collectors.toList());
+            purchaseDetailService.updateBatchById(detailEntities);
+        });
     }
 }

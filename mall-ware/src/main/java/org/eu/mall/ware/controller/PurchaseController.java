@@ -2,16 +2,13 @@ package org.eu.mall.ware.controller;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
 import org.eu.mall.ware.vo.MergeVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.eu.mall.ware.entity.PurchaseEntity;
 import org.eu.mall.ware.service.PurchaseService;
@@ -32,6 +29,17 @@ import org.eu.common.utils.R;
 public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;
+
+    /**
+     * 领取采购单(批量)
+     *
+     * @return
+     */
+    @PostMapping("/received")
+    public R received(@RequestBody List<Long> ids) {
+        purchaseService.received(ids);
+        return R.ok();
+    }
 
     /**
      * 合并采购需求
