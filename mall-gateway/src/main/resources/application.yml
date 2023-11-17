@@ -70,7 +70,7 @@ spring:
         - id: gulimall_search_route
           uri: lb://mall-search
           predicates:
-            - Host=search.gulimall.com
+            - Host=search.vmake.eu.org
         - id: gulimall_auth_route
           uri: lb://mall-auth-server
           predicates:
