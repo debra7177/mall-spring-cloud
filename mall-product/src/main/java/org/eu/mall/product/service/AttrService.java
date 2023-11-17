@@ -41,23 +41,57 @@ public interface AttrService extends IService<AttrEntity> {
      *
      * @param params    the params
      * @param catelogId the catelog id
-     * @param type
+     * @param type      the type
      * @return the page utils
      */
     PageUtils queryBaseAttrPage(Map<String, Object> params, Long catelogId, String type);
 
+    /**
+     * Gets attr info.
+     *
+     * @param attrId the attr id
+     * @return the attr info
+     */
     AttrResponseVo getAttrInfo(Long attrId);
 
+    /**
+     * Update attr.
+     *
+     * @param attr the attr
+     */
     void updateAttr(AttrVo attr);
 
+    /**
+     * Gets relation attr.
+     *
+     * @param attrGroupId the attr group id
+     * @return the relation attr
+     */
     List<AttrEntity> getRelationAttr(Long attrGroupId);
 
     /**
      * 删除基本属性 - 属性分组关联关系
-     * @param vos
+     *
+     * @param vos the vos
      */
     void deleteRelation(AttrGroupRelationVo[] vos);
 
+    /**
+     * Gets no relation attr.
+     *
+     * @param params      the params
+     * @param attrGroupId the attr group id
+     * @return the no relation attr
+     */
     PageUtils getNoRelationAttr(Map<String, Object> params, Long attrGroupId);
+
+
+    /**
+     * 在指定的所有属性集合里面 挑出检索属性
+     *
+     * @param attrIds the attr ids
+     * @return the list
+     */
+    List<Long> selectSearchAttrIds(List<Long> attrIds);
 }
 
