@@ -584,12 +584,12 @@
 <script type="text/javascript">
   function search() {
     var keyword = $("#searchText").val()
-    window.location.href = "http://search.gulimall.com/list.html?keyword=" + keyword;
+    window.location.href = "http://search.vmake.eu.org/list.html?keyword=" + keyword;
   }
   function to_href(skuId){
-    location.href = "http://item.gulimall.com/"+skuId+".html";
+    location.href = "http://item.vmake.eu.org/"+skuId+".html";
   }
-  $.get("http://seckill.gulimall.com/currentSeckillSkus",function(resp){
+  $.get("http://seckill.vmake.eu.org/currentSeckillSkus",function(resp){
     if(resp.data.length > 0){
       resp.data.forEach(function(item){
 

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -51,5 +52,11 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
             categoryBrandRelationService.updateBrand(brand.getBrandId(), brand.getName());
             // todo 更新其他关联
         }
+    }
+
+    @Override
+    public List<BrandEntity> getBrandsByIds(List<Long> brandIds) {
+
+        return list(new QueryWrapper<BrandEntity>().in("brand_id", brandIds));
     }
 }

@@ -1067,7 +1067,7 @@
 
                             <a href="/static/search/#">评论分</a>
                             <a href="/static/search/#">上架时间</a>
-                                                                                        <!--                            300_500 _500 500_      #strings.substringAfter(priceRange,'-')-->
+                            <!--                            300_500 _500 500_      #strings.substringAfter(priceRange,'-')-->
 
 
                             <input id="skuPriceFrom" type="number" style="width: 100px;margin-left: 30px;" th:value="${#strings.isEmpty(priceRange)?'':#strings.substringBefore(priceRange,'_')}"> -
@@ -2131,13 +2131,13 @@
     });
 
     $("#showHasStock").change(function () {
-       if($(this).prop('checked')){
-           location.href = replaceAndAddParamVal(location.href,"hasStock",1);
-       }else{
+        if($(this).prop('checked')){
+            location.href = replaceAndAddParamVal(location.href,"hasStock",1);
+        }else{
             //没选中
-           var re = eval('/(hasStock=)([^&]*)/gi');
-           location.href = (location.href+"").replace(re,'');
-       }
+            var re = eval('/(hasStock=)([^&]*)/gi');
+            location.href = (location.href+"").replace(re,'');
+        }
         return false;
     })
 </script>
