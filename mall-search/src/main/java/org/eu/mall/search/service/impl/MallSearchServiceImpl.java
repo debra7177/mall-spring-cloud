@@ -192,7 +192,7 @@ public class MallSearchServiceImpl implements MallSearchService {
                 StringBuffer buffer = new StringBuffer();
                 String replace = "";
                 for (BrandVo brandVo : brand) {
-                    buffer.append(brandVo.getBrandName() + ";");
+                    buffer.append(brandVo.getName() + ";");
                     replace = replaceQueryString(param, brandVo.getBrandId() + "", "brandId");
                 }
                 navVo.setNavValue(buffer.toString());
