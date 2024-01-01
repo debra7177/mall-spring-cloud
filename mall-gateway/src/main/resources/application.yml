@@ -72,7 +72,7 @@ spring:
           predicates:
             - Host=search.vmake.eu.org
         - id: gulimall_auth_route
-          uri: lb://mall-auth-server
+          uri: lb://mall-auth
           predicates:
             - Host=auth.vmake.eu.org
 

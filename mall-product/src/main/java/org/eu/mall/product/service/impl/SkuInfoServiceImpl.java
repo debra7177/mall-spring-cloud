@@ -42,7 +42,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
     private SkuImagesService skuImagesService;
 
     @Autowired
-    ThreadPoolExecutor executor;
+    private ThreadPoolExecutor executor;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
