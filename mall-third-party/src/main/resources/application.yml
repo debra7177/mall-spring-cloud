@@ -9,6 +9,12 @@ spring:
       oss:
         endpoint: oss-cn-guangzhou.aliyuncs.com
         bucket: guanzhuo-vod-project
+      sms:
+        host: https://gyytz.market.alicloudapi.com
+        path: /sms/smsSend
+        appcode: ea16f2e9712c47a2b30466cba6fed2f9
+        smsSignId: 2e65b1bb3d054466b82f0c9d125465e2
+        templateId: CST_ptdie100
   application:
     name: mall-third-party
 server:
