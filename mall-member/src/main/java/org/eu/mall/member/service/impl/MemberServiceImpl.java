@@ -1,5 +1,13 @@
 package org.eu.mall.member.service.impl;
 
+import org.eu.mall.member.dao.MemberLevelDao;
+import org.eu.mall.member.entity.MemberLevelEntity;
+import org.eu.mall.member.exception.PhoneExistException;
+import org.eu.mall.member.exception.UsernameExistException;
+import org.eu.mall.member.vo.MemberLoginVo;
+import org.eu.mall.member.vo.MemberRegistVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -16,6 +24,9 @@ import org.eu.mall.member.service.MemberService;
 @Service("memberService")
 public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> implements MemberService {
 
+    @Autowired
+    private MemberLevelDao memberLevelDao;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<MemberEntity> page = this.page(
@@ -26,4 +37,58 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
         return new PageUtils(page);
     }
 
+    @Override
+    public void regist(MemberRegistVo vo) {
+        MemberEntity memberEntity = new MemberEntity();
+        // 设置默认等级
+        MemberLevelEntity levelEntity = memberLevelDao.getDefaultLevel();
+        memberEntity.setLevelId(levelEntity.getId());
+        // 检查手机号和用户名是否唯一
+        checkPhoneUnique(vo.getPhone());
+        checkUserNameUnique(vo.getUsername());
+
+        memberEntity.setMobile(vo.getPhone());
+        memberEntity.setUsername(vo.getUsername());
+        // 密码
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encode = passwordEncoder.encode(vo.getPassword());
+        memberEntity.setPassword(encode);
+
+        this.save(memberEntity);
+    }
+
+    @Override
+    public void checkPhoneUnique(String phone) throws PhoneExistException {
+        int mobile = this.count(new QueryWrapper<MemberEntity>().eq("mobile", phone));
+        if (mobile > 0) {
+            throw new PhoneExistException();
+        }
+    }
+
+    @Override
+    public void checkUserNameUnique(String userName) throws UsernameExistException {
+        int username = this.count(new QueryWrapper<MemberEntity>().eq("username", userName));
+        if (username > 0) {
+            throw new UsernameExistException();
+        }
+    }
+
+    @Override
+    public MemberEntity login(MemberLoginVo vo) {
+        String loginacct = vo.getLoginacct();
+        String password = vo.getPassword();
+        MemberEntity entity = this.getOne(new QueryWrapper<MemberEntity>().eq("username", loginacct).or().eq("mobile", loginacct));
+        if (entity == null) {
+            return null;
+        }else {
+            String passwordDB = entity.getPassword();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            boolean matches = passwordEncoder.matches(password, passwordDB);
+            if (matches) {
+                return entity;
+            }else {
+                return null;
+            }
+        }
+    }
 }
