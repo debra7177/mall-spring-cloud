@@ -9,7 +9,7 @@ import lombok.Data;
 
 /**
  * 会员
- * 
+ *
  * @author kevin
  * @email drzhong2015@gmail.com
  * @date 2023-10-25 18:48:06
@@ -92,5 +92,9 @@ public class MemberEntity implements Serializable {
 	 * 注册时间
 	 */
 	private Date createTime;
+
+	private String socialUid;
+	private String accessToken;
+	private Long expiresIn;
 
 }

@@ -7,6 +7,7 @@ import org.eu.mall.member.exception.PhoneExistException;
 import org.eu.mall.member.exception.UsernameExistException;
 import org.eu.mall.member.vo.MemberLoginVo;
 import org.eu.mall.member.vo.MemberRegistVo;
+import org.eu.mall.member.vo.SocialUser;
 
 import java.util.Map;
 
@@ -42,5 +43,12 @@ public interface MemberService extends IService<MemberEntity> {
     void checkUserNameUnique(String userName) throws UsernameExistException;
 
     MemberEntity login(MemberLoginVo vo);
+
+    /**
+     * 社交登录
+     * @param socialUser
+     * @return
+     */
+    MemberEntity login(SocialUser socialUser);
 }
 

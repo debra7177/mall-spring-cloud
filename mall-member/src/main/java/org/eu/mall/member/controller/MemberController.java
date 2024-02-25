@@ -9,6 +9,7 @@ import org.eu.mall.member.exception.PhoneExistException;
 import org.eu.mall.member.exception.UsernameExistException;
 import org.eu.mall.member.vo.MemberLoginVo;
 import org.eu.mall.member.vo.MemberRegistVo;
+import org.eu.mall.member.vo.SocialUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,16 @@ import org.eu.common.utils.R;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @PostMapping("/oauth2/login")
+    public R oauth(@RequestBody SocialUser socialUser) {
+        MemberEntity entity = memberService.login(socialUser);
+        if (entity != null) {
+            return R.ok().setData(entity);
+        }else {
+            return R.error(BizCodeEnum.LOGINACCT_PASSWORD_INVAILD_EXCEPTION.getCode(), BizCodeEnum.LOGINACCT_PASSWORD_INVAILD_EXCEPTION.getMsg());
+        }
+    }
 
     @PostMapping("/login")
     public R login(@RequestBody MemberLoginVo vo) {

@@ -1,14 +1,22 @@
 package org.eu.mall.member.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
+import org.eu.common.utils.HttpUtils;
 import org.eu.mall.member.dao.MemberLevelDao;
 import org.eu.mall.member.entity.MemberLevelEntity;
 import org.eu.mall.member.exception.PhoneExistException;
 import org.eu.mall.member.exception.UsernameExistException;
 import org.eu.mall.member.vo.MemberLoginVo;
 import org.eu.mall.member.vo.MemberRegistVo;
+import org.eu.mall.member.vo.SocialUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -45,10 +53,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
         memberEntity.setLevelId(levelEntity.getId());
         // 检查手机号和用户名是否唯一
         checkPhoneUnique(vo.getPhone());
-        checkUserNameUnique(vo.getUsername());
+        checkUserNameUnique(vo.getUserName());
 
         memberEntity.setMobile(vo.getPhone());
-        memberEntity.setUsername(vo.getUsername());
+        memberEntity.setUsername(vo.getUserName());
         // 密码
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encode = passwordEncoder.encode(vo.getPassword());
@@ -89,6 +97,45 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
             }else {
                 return null;
             }
+        }
+    }
+
+    @Override
+    public MemberEntity login(SocialUser socialUser) {
+        String uid = socialUser.getUid();
+        MemberEntity memberEntity = this.getOne(new QueryWrapper<MemberEntity>().eq("social_uid", uid));
+        if (memberEntity != null) {
+            MemberEntity update = new MemberEntity();
+            update.setId(memberEntity.getId());
+            update.setAccessToken(socialUser.getAccess_token());
+            update.setExpiresIn(socialUser.getExpires_in());
+            this.updateById(update);
+            memberEntity.setAccessToken(socialUser.getAccess_token());
+            memberEntity.setExpiresIn(socialUser.getExpires_in());
+            return memberEntity;
+        }else {
+            MemberEntity regist = new MemberEntity();
+            Map<String, String> query = new HashMap<>();
+            query.put("access_token", socialUser.getAccess_token());
+            query.put("uid", socialUser.getUid());
+            try {
+                HttpResponse response = HttpUtils.doGet("https://api.weibo.com", "/2/users/show.json", "get", new HashMap<String, String>(), query);
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    String json = EntityUtils.toString(response.getEntity());
+                    JSONObject jsonObject = JSON.parseObject(json);
+                    String name = jsonObject.getString("name");
+                    String gender = jsonObject.getString("gender");
+                    regist.setNickname(name);
+                    regist.setGender("m".equals(gender) ? 1 : 0);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            regist.setSocialUid(socialUser.getUid());
+            regist.setAccessToken(socialUser.getAccess_token());
+            regist.setExpiresIn(socialUser.getExpires_in());
+            save(regist);
+            return regist;
         }
     }
 }
