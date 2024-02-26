@@ -5,6 +5,7 @@ import com.alibaba.fastjson.TypeReference;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.eu.common.constant.AuthConstant;
 import org.eu.common.utils.HttpUtils;
 import org.eu.common.utils.R;
 import org.eu.common.vo.MemberRespVo;
@@ -48,7 +49,7 @@ public class OAuth2Controller {
                 MemberRespVo data = oauthlogin.getData("data", new TypeReference<MemberRespVo>() {
                 });
                 log.info("登录成功, 用户:{}", data.toString());
-                session.setAttribute("loginUser", data);
+                session.setAttribute(AuthConstant.LOGIN_USER, data);
                 return "redirect:http://www.vmake.eu.org";
             }else {
                 return "redirect:http://auth.vmake.eu.org/login.html";

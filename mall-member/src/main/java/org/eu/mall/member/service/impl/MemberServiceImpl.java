@@ -57,6 +57,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
 
         memberEntity.setMobile(vo.getPhone());
         memberEntity.setUsername(vo.getUserName());
+        memberEntity.setNickname(vo.getUserName());
         // 密码
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encode = passwordEncoder.encode(vo.getPassword());
@@ -114,6 +115,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
             memberEntity.setExpiresIn(socialUser.getExpires_in());
             return memberEntity;
         }else {
+            // 注册
             MemberEntity regist = new MemberEntity();
             Map<String, String> query = new HashMap<>();
             query.put("access_token", socialUser.getAccess_token());
@@ -127,6 +129,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
                     String gender = jsonObject.getString("gender");
                     regist.setNickname(name);
                     regist.setGender("m".equals(gender) ? 1 : 0);
+                    regist.setNickname(name);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
