@@ -7,11 +7,7 @@ import java.util.Map;
 import org.eu.mall.product.service.SpuInfoService;
 import org.eu.mall.product.vo.SpuSaveVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import org.eu.mall.product.entity.SkuInfoEntity;
 import org.eu.mall.product.service.SkuInfoService;
@@ -35,6 +31,15 @@ public class SkuInfoController {
 
     @Autowired
     private SpuInfoService spuInfoService;
+    /**
+     * 获取sku价格 OpenFeign
+     */
+    @GetMapping("/{skuId}/price")
+    public R getPrice(@PathVariable("skuId") Long skuId)
+    {
+        SkuInfoEntity skuInfoEntity = skuInfoService.getById(skuId);
+        return R.ok().setData(skuInfoEntity.getPrice().toString());
+    }
 
     /**
      * 列表

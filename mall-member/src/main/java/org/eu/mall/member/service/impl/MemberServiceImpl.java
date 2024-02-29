@@ -129,7 +129,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
                     String gender = jsonObject.getString("gender");
                     regist.setNickname(name);
                     regist.setGender("m".equals(gender) ? 1 : 0);
-                    regist.setNickname(name);
+                    regist.setUsername(name);
+                    // 设置默认等级
+                    MemberLevelEntity levelEntity = memberLevelDao.getDefaultLevel();
+                    regist.setLevelId(levelEntity.getId());
                 }
             } catch (Exception e) {
                 e.printStackTrace();

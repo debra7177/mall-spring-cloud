@@ -34,10 +34,10 @@ public class OAuth2Controller {
         Map<String, String> query = new HashMap<>();
 
         Map<String, String> map = new HashMap<>();
-        map.put("client_id", "");
-        map.put("client_secret", "");
+        map.put("client_id", "3702600112");
+        map.put("client_secret", "b9184cb8214a2929a9052bbefbfa8cad");
         map.put("grant_type", "authorization_code");
-        map.put("redirect_url", "http://auth.vmake.eu.org/oauth2.0/weibo/success");
+        map.put("redirect_uri", "http://auth.vmake.eu.org/oauth2.0/weibo/success");
         map.put("code", code);
         HttpResponse response = HttpUtils.doPost("https://api.weibo.com", "/oauth2/access_token", "post", header, query, map);
         if (response.getStatusLine().getStatusCode() == 200) {

@@ -65,7 +65,7 @@ spring:
         - id: gulimall_host_route
           uri: lb://mall-product
           predicates:
-            - Host=www.vmake.eu.org,item.vmake.eu.org
+            - Host=www.vmake.eu.org,item.vmake.eu.org,vmake.eu.org
 
         - id: gulimall_search_route
           uri: lb://mall-search

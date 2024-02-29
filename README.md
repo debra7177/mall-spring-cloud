@@ -6,6 +6,10 @@
 ### SPU - SKU - 属性表
 ![](https://pic.vbean.eu.org/images/2023/10/c32674002176f6d7be2a0ef5d18ed092.png)
 
+## 过滤器和拦截器
+![](https://pic.vbean.eu.org/images/2024/02/0c30d628ba935145481e36a2ee3188cc.png)
+![](https://pic.vbean.eu.org/images/2024/02/f9810c54584b9e58297a55713ab61c71.png)
+![](https://pic.vbean.eu.org/images/2024/02/11cce15a0bbb6b4c17bd2a90ef2865fd.png)
 
 ## 启动admin前台
 ```bash
