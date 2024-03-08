@@ -4,12 +4,21 @@ spring:
   datasource:
     username: root
     password: kevin-mysql
-    url: jdbc:mysql://192.168.1.102:3306/gulimall_oms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.1.102:3306/gulimall_oms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
   cloud:
     nacos:
       discovery:
         server-addr: 192.168.1.102:8848
+#  rabbitmq:
+#    publisher-confirms: true
+#    publisher-returns: true
+#    template:
+#      mandatory: true
+#    listener:
+#      direct:
+#        acknowledge-mode: manual
+
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -17,4 +26,4 @@ mybatis-plus:
     db-config:
       id-type: auto
 server:
-  port: 9000
+  port: 9010

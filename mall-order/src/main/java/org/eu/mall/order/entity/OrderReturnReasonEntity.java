@@ -6,14 +6,16 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import lombok.ToString;
 
 /**
  * 退货原因
- * 
+ *
  * @author kevin
  * @email drzhong2015@gmail.com
  * @date 2023-10-25 18:59:18
  */
+@ToString
 @Data
 @TableName("oms_order_return_reason")
 public class OrderReturnReasonEntity implements Serializable {
