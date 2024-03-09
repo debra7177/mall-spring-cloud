@@ -3,7 +3,9 @@ package org.eu.mall.ware.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.eu.common.utils.PageUtils;
 import org.eu.mall.ware.entity.WareInfoEntity;
+import org.eu.mall.ware.vo.FareVo;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -16,5 +18,12 @@ import java.util.Map;
 public interface WareInfoService extends IService<WareInfoEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    /**
+     * 计算运费
+     * @param addrId
+     * @return
+     */
+    FareVo getFare(Long addrId);
 }
 

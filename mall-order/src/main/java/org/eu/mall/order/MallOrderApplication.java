@@ -54,7 +54,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 //@EnableAspectJAutoProxy(exposeProxy = true)
 @EnableRedisHttpSession
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "org.eu.mall.order.feign")
 @EnableRabbit
 @SpringBootApplication
 public class MallOrderApplication {

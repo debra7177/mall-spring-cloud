@@ -34,6 +34,7 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemDao, OrderItemEnt
     }
 
     /**
+     * 处理消息手动ack示例
      * queues：声明需要监听的所有队列
      *
      * org.springframework.amqp.core.Message

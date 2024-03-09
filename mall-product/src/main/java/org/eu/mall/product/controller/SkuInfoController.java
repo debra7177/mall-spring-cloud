@@ -38,7 +38,7 @@ public class SkuInfoController {
     public R getPrice(@PathVariable("skuId") Long skuId)
     {
         SkuInfoEntity skuInfoEntity = skuInfoService.getById(skuId);
-        return R.ok().setData(skuInfoEntity.getPrice().toString());
+        return R.ok().setData(skuInfoEntity.getPrice());
     }
 
     /**

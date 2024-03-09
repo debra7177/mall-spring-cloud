@@ -153,15 +153,16 @@ public class CartServiceImpl implements CartService {
         String cartKey = CART_KEY_PREFIX + userInfoTo.getUserId();
         List<CartItem> cartItems = getCartItems(cartKey);
         // 获取所有被选中的购物项
-        List<CartItem> collect = Objects.requireNonNull(cartItems).stream().filter(CartItem::getCheck).map((item) -> {
-            // 获取价格
-            R price = productFeignService.getPrice(item.getSkuId());
-            item.setPrice(price.getData("price", new TypeReference<BigDecimal>() {
-            }));
-            return item;
-        }).collect(Collectors.toList());
-
-        return collect;
+        if (cartItems != null && cartItems.size() > 0) {
+            return cartItems.stream().filter(CartItem::getCheck).map((item) -> {
+                // 获取价格
+                R price = productFeignService.getPrice(item.getSkuId());
+                item.setPrice(price.getData(new TypeReference<BigDecimal>() {
+                }));
+                return item;
+            }).collect(Collectors.toList());
+        }
+        return cartItems;
     }
 
     @Override
