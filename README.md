@@ -7,6 +7,13 @@
 - 创建采购需求
 - 合并到整单(采购需求已分配)
 - 完成采购(http://gateway:88/api/ware/purchase/done)
+## 电商订单流程图
+![](https://pic.vbean.eu.org/images/2024/03/761f40b5c8e20b5537258c8bf4f9f1e7.png)
+## 订单确认流程
+![](https://pic.vbean.eu.org/images/2024/03/4bc66ba628e03cb133dbc4319a9a42c7.png)
+## 下单流程
+![](https://pic.vbean.eu.org/images/2024/03/820bac24ce324d6854baf051ea5b6eec.png)
+![](https://pic.vbean.eu.org/images/2024/03/048616d81517422648b2e0d16991fe33.png)
 ## 部署
 
 ## 表关系

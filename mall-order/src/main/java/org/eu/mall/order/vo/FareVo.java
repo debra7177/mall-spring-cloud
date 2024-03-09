@@ -1,4 +1,4 @@
-package org.eu.mall.ware.vo;
+package org.eu.mall.order.vo;
 
 import lombok.Data;
 
