@@ -20,14 +20,19 @@ renren后台: http://192.168.1.102:8001/#/login
 ![](https://pic.vbean.eu.org/images/2024/03/0117d82972c13ee949e2713a1899cea2.png)
 ![](https://pic.vbean.eu.org/images/2024/03/da75a217d723d32c820a596f9f17b09c.png)
 **阿里巴巴分布式事务解决方案seata 案例**
-
-https://github.com/apache/incubator-seata-samples
+[官网](https://seata.apache.org/zh-cn/docs/overview/what-is-seata)
+[案例仓库](https://github.com/apache/incubator-seata-samples)
 
 https://github.com/apache/incubator-seata-samples/tree/master/springcloud-jpa-seata
 seata windows启动
 ```bash 
 .\seata-server.bat -h 192.168.1.100 -p 8091
 ```
+## 分布式事务 可靠消息 + 最终一致性
+![](https://pic.vbean.eu.org/images/2024/03/e28229c7a45755b0591e5a1412f9a880.jpg)
+http://studio:15672/#/queues
+### 设置队列过期时间的的延时队列
+![](https://pic.vbean.eu.org/images/2024/03/97806109b4b4c726a0a2d8e7cadcdefe.png)
 ## 部署
 
 ## 表关系

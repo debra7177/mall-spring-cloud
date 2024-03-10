@@ -138,7 +138,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
     //分布式事务： 最大原因。网络问题 +分布式机器。
     //(isolation = Isolation.REPEATABLE_READ)
     //REQUIRED、REQUIRES_NEW
-    @GlobalTransactional
+    //@GlobalTransactional
+    // 这里是高并发场景 使用 alibaba Seata AT 模式效率不高
+    // 也不使用 TCC事务补偿方案
+    // 采用 最大努力通知方案(BASE理论) 可靠消息 + 最终一致性
     @Transactional
     @Override
     public SubmitOrderResponseVo submitOrder(OrderSubmitVo vo) {

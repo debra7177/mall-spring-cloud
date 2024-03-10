@@ -1,6 +1,7 @@
 package org.eu.mall.product.service.impl;
 
 import com.alibaba.fastjson.TypeReference;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.eu.common.constant.ProductConstant;
 import org.eu.common.to.SkuHasStockVo;
 import org.eu.common.to.SkuReductionTo;
@@ -81,6 +82,11 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         return new PageUtils(page);
     }
 
+    /**
+     * @GlobalTransactional
+     * 适合 Seata AT 分布式事务
+     * @param vo the vo
+     */
     @Transactional
     @Override
     public void saveSpuInfo(SpuSaveVo vo) {
