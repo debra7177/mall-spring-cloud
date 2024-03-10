@@ -24,3 +24,12 @@ logging:
   level:
     org.eu:
       debug
+
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connect-timeout: 300000
+        read-timeout: 300000

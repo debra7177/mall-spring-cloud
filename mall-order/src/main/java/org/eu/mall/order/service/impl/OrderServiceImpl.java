@@ -2,6 +2,7 @@ package org.eu.mall.order.service.impl;
 
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.eu.common.utils.R;
 import org.eu.common.vo.MemberRespVo;
 import org.eu.mall.order.constant.OrderConstant;
@@ -12,6 +13,7 @@ import org.eu.mall.order.feign.MemberFeignService;
 import org.eu.mall.order.feign.ProductFeignService;
 import org.eu.mall.order.feign.WmsFeignService;
 import org.eu.mall.order.interceptor.LoginUserInterceptor;
+import org.eu.mall.order.service.OrderItemService;
 import org.eu.mall.order.to.OrderCreateTo;
 import org.eu.mall.order.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,7 @@ import org.eu.common.utils.Query;
 import org.eu.mall.order.dao.OrderDao;
 import org.eu.mall.order.entity.OrderEntity;
 import org.eu.mall.order.service.OrderService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -47,6 +50,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
 
     @Autowired
     private MemberFeignService memberFeignService;
+
+    @Autowired
+    private OrderItemService orderItemService;
 
     @Autowired
     private CartFeignService cartFeignService;
@@ -128,6 +134,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
     }
 
     //下单：去创建订单，验令牌，验价格，锁库存...
+    //本地事务，在分布式系统，只能控制住自己的回滚，控制不了其他服务的回滚
+    //分布式事务： 最大原因。网络问题 +分布式机器。
+    //(isolation = Isolation.REPEATABLE_READ)
+    //REQUIRED、REQUIRES_NEW
+    @GlobalTransactional
+    @Transactional
     @Override
     public SubmitOrderResponseVo submitOrder(OrderSubmitVo vo) {
         confirmVoThreadLocal.set(vo);
@@ -150,8 +162,61 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
             //1、创建订单，订单项等信息
             OrderCreateTo order = createOrder();
             //2、验价
+            BigDecimal payAmount = order.getOrder().getPayAmount();
+            // 金额差 不能大于1分
+            if (Math.abs(payAmount.subtract(vo.getPayPrice()).doubleValue()) < 0.01) {
+                saveOrder(order);
+                //4、库存锁定。只要有异常回滚订单数据。
+                // 订单号，所有订单项（skuId，skuName，num）
+                WareSkuLockVo lockVo = new WareSkuLockVo();
+                lockVo.setOrderSn(order.getOrder().getOrderSn());
+                List<OrderItemVo> locks = order.getOrderItems().stream().map(item -> {
+                    OrderItemVo itemVo = new OrderItemVo();
+                    itemVo.setSkuId(item.getSkuId());
+                    itemVo.setCount(item.getSkuQuantity());
+                    itemVo.setTitle(item.getSkuName());
+                    return itemVo;
+                }).collect(Collectors.toList());
+                lockVo.setLocks(locks);
+                // feign 调用锁库存
+                //库存成功了，但是网络原因超时了，订单回滚，库存不滚。
+                R r = wmsFeignService.orderLockStock(lockVo);
+                if (r.getCode() == 0) {
+                    // 锁定成功
+                    response.setOrder(order.getOrder());
+                    //TODO 5、远程扣减积分 出异常
+                    int i = 10/0; //订单回滚，库存不滚
+                    return response;
+                }else {
+                    // 锁定失败
+                    response.setCode(3);
+                    return response;
+                }
+            }else {
+                response.setCode(2);
+                return response;
+            }
         }
-        return null;
+    }
+
+    /**
+     * 保存订单数据
+     *
+     * @param order
+     */
+    private void saveOrder(OrderCreateTo order) {
+        // order
+        OrderEntity orderEntity = order.getOrder();
+        orderEntity.setModifyTime(new Date());
+        save(orderEntity);
+        // orderItem
+        List<OrderItemEntity> orderItems = order.getOrderItems();
+        orderItemService.saveBatch(orderItems);
+        // seata 0.7.1会遇到无法批量插入 可以改为增强for循环单个插入 也可以升级seata-all到 0.9.0
+        // @link https://blog.csdn.net/jinjinbu/article/details/127733826
+        //for (OrderItemEntity orderItem : orderItems) {
+        //    orderItemService.save(orderItem);
+        //}
     }
 
     private OrderCreateTo createOrder() {

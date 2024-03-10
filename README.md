@@ -1,4 +1,6 @@
 后台接口: https://easydoc.net/s/78237135/ZUqEdvA4/vXMBBgw1
+
+renren后台: http://192.168.1.102:8001/#/login
 ## 采购单维护(自营)
 
 ![](https://pic.vbean.eu.org/images/2024/03/5723fba21f9899e54f87b0b771fdbacf.png)
@@ -14,6 +16,18 @@
 ## 下单流程
 ![](https://pic.vbean.eu.org/images/2024/03/820bac24ce324d6854baf051ea5b6eec.png)
 ![](https://pic.vbean.eu.org/images/2024/03/048616d81517422648b2e0d16991fe33.png)
+## 锁定库存
+![](https://pic.vbean.eu.org/images/2024/03/0117d82972c13ee949e2713a1899cea2.png)
+![](https://pic.vbean.eu.org/images/2024/03/da75a217d723d32c820a596f9f17b09c.png)
+**阿里巴巴分布式事务解决方案seata 案例**
+
+https://github.com/apache/incubator-seata-samples
+
+https://github.com/apache/incubator-seata-samples/tree/master/springcloud-jpa-seata
+seata windows启动
+```bash 
+.\seata-server.bat -h 192.168.1.100 -p 8091
+```
 ## 部署
 
 ## 表关系

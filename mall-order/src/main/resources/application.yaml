@@ -27,3 +27,11 @@ mybatis-plus:
       id-type: auto
 server:
   port: 9010
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connect-timeout: 300000
+        read-timeout: 300000
