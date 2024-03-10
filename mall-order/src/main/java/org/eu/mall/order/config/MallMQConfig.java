@@ -1,12 +1,13 @@
 package org.eu.mall.order.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.Exchange;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import com.rabbitmq.client.Channel;
+import org.eu.mall.order.entity.OrderEntity;
+import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,10 +15,20 @@ import java.util.Map;
 // 实现设置队列过期时间的延时队列
 @Configuration
 public class MallMQConfig {
+    /**
+     * 测试收到延迟队列消息
+     * @param entity
+     */
+    @RabbitListener(queues = "order.release.order.queue")
+    public void liistener(OrderEntity entity, Channel channel, Message message) throws IOException {
+        System.out.println("收到过期订单信息,准备关闭订单" + entity.getOrderSn());
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+
+    }
     // Binding，Queue，Exchange
 
     /**
-     * 创建死信队列
+     * 创建死信队列 ![](https://pic.vbean.eu.org/images/2024/03/1028d25862be6b18eef53c0599cd205c.png)
      * 容器中的 Binding，Queue，Exchange 都会自动创建（RabbitMQ没有的情况）
      * RabbitMQ 只要有。@Bean声明属性发生变化也不会覆盖 需要删除queue 或者 exchange再重启
      *
