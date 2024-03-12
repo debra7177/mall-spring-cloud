@@ -286,8 +286,21 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
         entity.setLockStatus(2); // 已解锁
         wareOrderTaskDetailService.updateById(entity);
     }
+    // 防止订单服务卡顿 导致订单状态消息一致改不了 库存消息优先到期 查订单状态新建状态 什么都不做就走了
+    // 导致卡顿的订单 永远不能解锁库存
+    @Transactional
     @Override
     public void unlockStock(OrderTo orderTo) {
+        String orderSn = orderTo.getOrderSn();
+        // 查询最新库存的状态 防止重复解锁库存
+        WareOrderTaskEntity task = wareOrderTaskService.getOrderTaskByOrderSn(orderSn);
+        Long id = task.getId();
+        // 按照工作单查询所有没有解锁的库存
+        List<WareOrderTaskDetailEntity> entities = wareOrderTaskDetailService.list(new QueryWrapper<WareOrderTaskDetailEntity>()
+                .eq("task_id", id).eq("lock_status", 1));
+        for (WareOrderTaskDetailEntity entity : entities) {
+            unlockStock(entity.getSkuId(), entity.getWareId(), entity.getSkuNum(), entity.getId());
+        }
 
     }
 }

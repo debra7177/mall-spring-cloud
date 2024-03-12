@@ -43,13 +43,18 @@ public interface WareSkuService extends IService<WareSkuEntity> {
     List<Long> listWareIdHasSkuStock(Long skuId);
 
     /**
-     * 解锁库存
+     * 解锁库存(自动解锁)
      *
      * @param to
      */
     void unlockStock(StockLockedTo to);
 
 
+    /**
+     * 解锁库存(订单取消)
+     *
+     * @param orderTo
+     */
     void unlockStock(OrderTo orderTo);
 }
 

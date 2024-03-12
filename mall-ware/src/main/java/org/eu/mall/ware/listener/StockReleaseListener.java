@@ -3,6 +3,7 @@ package org.eu.mall.ware.listener;
 import com.alibaba.fastjson.TypeReference;
 import com.rabbitmq.client.Channel;
 import org.eu.common.enume.OrderStatusEnum;
+import org.eu.common.to.mq.OrderTo;
 import org.eu.common.to.mq.StockDetailTo;
 import org.eu.common.to.mq.StockLockedTo;
 import org.eu.common.utils.R;
@@ -40,6 +41,17 @@ public class StockReleaseListener {
         System.out.println("收到解锁库存的消息");
         try {
             wareSkuService.unlockStock(to);
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        } catch (Exception e) {
+            channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
+        }
+    }
+
+    @RabbitHandler
+    public void handleOrderCloseRelease(OrderTo orderTo, Message message, Channel channel) throws IOException {
+        System.out.println("收到订单关闭的消息");
+        try {
+            wareSkuService.unlockStock(orderTo);
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         } catch (Exception e) {
             channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);

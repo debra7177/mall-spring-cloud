@@ -15,16 +15,16 @@ import java.util.Map;
 // 实现设置队列过期时间的延时队列
 @Configuration
 public class MallMQConfig {
-    /**
-     * 测试收到延迟队列消息
-     * @param entity
-     */
-    @RabbitListener(queues = "order.release.order.queue")
-    public void liistener(OrderEntity entity, Channel channel, Message message) throws IOException {
-        System.out.println("收到过期订单信息,准备关闭订单" + entity.getOrderSn());
-        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-
-    }
+    ///**
+    // * 测试收到延迟队列消息
+    // * @param entity
+    // */
+    //@RabbitListener(queues = "order.release.order.queue")
+    //public void liistener(OrderEntity entity, Channel channel, Message message) throws IOException {
+    //    System.out.println("收到过期订单信息,准备关闭订单" + entity.getOrderSn());
+    //    channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+    //
+    //}
     // Binding，Queue，Exchange
 
     /**
