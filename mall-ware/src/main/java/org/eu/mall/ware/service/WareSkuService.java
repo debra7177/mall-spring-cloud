@@ -1,6 +1,8 @@
 package org.eu.mall.ware.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.eu.common.to.mq.OrderTo;
+import org.eu.common.to.mq.StockLockedTo;
 import org.eu.common.utils.PageUtils;
 import org.eu.mall.ware.entity.WareSkuEntity;
 import org.eu.common.to.SkuHasStockVo;
@@ -39,5 +41,15 @@ public interface WareSkuService extends IService<WareSkuEntity> {
      * @return
      */
     List<Long> listWareIdHasSkuStock(Long skuId);
+
+    /**
+     * 解锁库存
+     *
+     * @param to
+     */
+    void unlockStock(StockLockedTo to);
+
+
+    void unlockStock(OrderTo orderTo);
 }
 

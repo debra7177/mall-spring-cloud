@@ -1,5 +1,6 @@
 package org.eu.mall.order;
 
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -56,7 +57,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "org.eu.mall.order.feign")
 @EnableRabbit
-@SpringBootApplication
+@SpringBootApplication(exclude = GlobalTransactional.class) // 排除了 Seata 分布式事务 GlobalTransactional
 public class MallOrderApplication {
 
     public static void main(String[] args) {

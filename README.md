@@ -34,6 +34,8 @@ http://studio:15672/#/queues
 ### 设置队列过期时间的的延时队列
 ![](https://pic.vbean.eu.org/images/2024/03/97806109b4b4c726a0a2d8e7cadcdefe.png)
 ![](https://pic.vbean.eu.org/images/2024/03/1028d25862be6b18eef53c0599cd205c.png)
+### 锁库存
+![](https://pic.vbean.eu.org/images/2024/03/3b93374f774863bcf6566bffd3634b31.png)
 ## 部署
 
 ## 表关系
