@@ -13,6 +13,6 @@ public interface OrderFeignService {
      * @param orderSn
      * @return
      */
-    @GetMapping("/status/{orderSn}")
+    @GetMapping("/order/order/status/{orderSn}")
     R getOrderStatus(@PathVariable("orderSn") String orderSn);
 }
