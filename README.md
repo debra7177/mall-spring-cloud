@@ -36,6 +36,8 @@ http://studio:15672/#/queues
 ![](https://pic.vbean.eu.org/images/2024/03/1028d25862be6b18eef53c0599cd205c.png)
 ### 锁库存
 ![](https://pic.vbean.eu.org/images/2024/03/3b93374f774863bcf6566bffd3634b31.png)
+### 如何保证消息的可靠性
+![](https://pic.vbean.eu.org/images/2024/03/2a41b6f03b946b3d34c6e4368af60966.png)
 ## 部署
 
 ## 表关系

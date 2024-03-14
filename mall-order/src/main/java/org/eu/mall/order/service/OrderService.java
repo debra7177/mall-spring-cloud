@@ -5,6 +5,7 @@ import org.eu.common.utils.PageUtils;
 import org.eu.mall.order.entity.OrderEntity;
 import org.eu.mall.order.vo.OrderConfirmVo;
 import org.eu.mall.order.vo.OrderSubmitVo;
+import org.eu.mall.order.vo.PayVo;
 import org.eu.mall.order.vo.SubmitOrderResponseVo;
 
 import java.util.Map;
@@ -46,5 +47,19 @@ public interface OrderService extends IService<OrderEntity> {
      * @param entity
      */
     void closeOrder(OrderEntity entity);
+
+    /**
+     * 获取当前订单的支付信息
+     * @param orderSn
+     * @return
+     */
+    PayVo getOrderPay(String orderSn);
+
+    /**
+     * 查询当前登录用户使所有订单
+     * @param params
+     * @return
+     */
+    PageUtils queryPageWithItem(Map<String, Object> params);
 }
 

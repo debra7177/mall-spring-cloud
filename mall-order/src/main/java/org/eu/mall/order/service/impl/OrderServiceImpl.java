@@ -396,12 +396,45 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
 
             // 发送消息给MQ 释放订单服务
             try {
-                // TODO 保证消息一定会发送出去，每一个消息都可以做好日志记录（给数据库保存每一个消息的详细信息）。
+                // TODO 保证消息一定会发送出去，每一个消息都可以做好日志记录（mq_message表给数据库保存每一个消息的详细信息）。
                 //定期扫描数据库将失败的消息再发送一遍；
                 rabbitTemplate.convertAndSend("order-event-exchange", "order.release.other", orderTo);
             } catch (Exception e) {
                 //将没法送成功的消息进行重试发送
             }
         }
+    }
+
+    @Override
+    public PayVo getOrderPay(String orderSn) {
+        PayVo payVo = new PayVo();
+        OrderEntity order = getOrderByOrderSn(orderSn);
+
+        BigDecimal bigDecimal = order.getPayAmount().setScale(2, BigDecimal.ROUND_UP);
+        payVo.setTotal_amount(bigDecimal.toString());
+        payVo.setOut_trade_no(order.getOrderSn());
+
+        List<OrderItemEntity> order_sn = orderItemService.list(new QueryWrapper<OrderItemEntity>().eq("order_sn", orderSn));
+        OrderItemEntity entity = order_sn.get(0);
+        payVo.setSubject(entity.getSkuName()); // 标题
+        payVo.setBody(entity.getSkuAttrsVals()); // 备注
+        return payVo;
+    }
+
+    @Override
+    public PageUtils queryPageWithItem(Map<String, Object> params) {
+        MemberRespVo memberRespVo = LoginUserInterceptor.loginUser.get();
+        IPage<OrderEntity> page = this.page(
+                new Query<OrderEntity>().getPage(params),
+                new QueryWrapper<OrderEntity>().eq("member_id", memberRespVo.getId()).orderByDesc("id")
+        );
+        List<OrderEntity> order_sn = page.getRecords().stream().map(order -> {
+            List<OrderItemEntity> itemEntities = orderItemService.list(new QueryWrapper<OrderItemEntity>().eq("order_sn", order.getOrderSn()));
+            order.setItemEntities(itemEntities);
+            return order;
+        }).collect(Collectors.toList());
+        page.setRecords(order_sn);
+
+        return new PageUtils(page);
     }
 }
