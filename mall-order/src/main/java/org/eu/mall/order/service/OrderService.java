@@ -3,10 +3,7 @@ package org.eu.mall.order.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.eu.common.utils.PageUtils;
 import org.eu.mall.order.entity.OrderEntity;
-import org.eu.mall.order.vo.OrderConfirmVo;
-import org.eu.mall.order.vo.OrderSubmitVo;
-import org.eu.mall.order.vo.PayVo;
-import org.eu.mall.order.vo.SubmitOrderResponseVo;
+import org.eu.mall.order.vo.*;
 
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -61,5 +58,12 @@ public interface OrderService extends IService<OrderEntity> {
      * @return
      */
     PageUtils queryPageWithItem(Map<String, Object> params);
+
+    /**
+     * 处理支付宝的异步通知
+     * @param vo
+     * @return
+     */
+    String handlePayResult(PayAsyncVo vo);
 }
 
