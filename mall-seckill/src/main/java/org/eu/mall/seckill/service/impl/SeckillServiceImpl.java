@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -124,5 +125,34 @@ public class SeckillServiceImpl implements SeckillService {
                 stringRedisTemplate.expireAt(key, new Date(end));
             }
         });
+    }
+
+    @Override
+    public List<SecKillSkuRedisTo> getCurrentSeckillSkus() {
+        // 确定当前时间属于哪个秒杀场次
+        long time = new Date().getTime();
+        Set<String> keys = stringRedisTemplate.keys(SESSIONS_CACHE_PREFIX + "*");
+        for (String key : keys) {
+            //seckill:sessions:1582250400000_1582254000000
+            String replace = key.replace(SESSIONS_CACHE_PREFIX, "");
+            String[] s = replace.split("_");
+            long start = Long.parseLong(s[0]);
+            long end = Long.parseLong(s[1]);
+            if (time >= start && time <= end) {
+                // 获取这个秒杀场次需要的所有商品信息
+                List<String> range = stringRedisTemplate.opsForList().range(key, -100, 100);
+                BoundHashOperations<String, String, String> hashOps = stringRedisTemplate.boundHashOps(SKUKILL_CACHE_PREFIX);
+                List<String> list = hashOps.multiGet(range);
+                if (list != null) {
+                    return list.stream().map(item -> {
+                        SecKillSkuRedisTo redis = JSON.parseObject(item, SecKillSkuRedisTo.class);
+                        //redis.setRandomCode(null); //当前秒杀开始就需要随机码
+                        return redis;
+                    }).collect(Collectors.toList());
+                }
+                break;
+            }
+        }
+        return null;
     }
 }
