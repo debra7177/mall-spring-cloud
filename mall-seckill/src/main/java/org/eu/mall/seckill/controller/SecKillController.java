@@ -6,6 +6,7 @@ import org.eu.mall.seckill.to.SecKillSkuRedisTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,5 +27,17 @@ public class SecKillController {
     public R currentSeckillSkus() {
         List<SecKillSkuRedisTo> currentSeckillSkus = seckillService.getCurrentSeckillSkus();
         return R.ok().setData(currentSeckillSkus);
+    }
+
+    /**
+     * 查询商品是否参加秒杀活动 参与则返回场次信息和sku信息
+     * @param skuId
+     * @return
+     */
+    @ResponseBody
+    @GetMapping("/sku/seckill/{skuId}")
+    public R getSkuSeckillInfo(@PathVariable("skuId") Long skuId) {
+        SecKillSkuRedisTo skuRedisTo = seckillService.getSkuSeckillInfo(skuId);
+        return R.ok().setData(skuRedisTo);
     }
 }

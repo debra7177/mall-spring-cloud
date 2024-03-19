@@ -15,4 +15,11 @@ public interface SeckillService {
      * @return
      */
     List<SecKillSkuRedisTo> getCurrentSeckillSkus();
+
+    /**
+     * 返回指定商品的秒杀信息
+     * @param skuId
+     * @return
+     */
+    SecKillSkuRedisTo getSkuSeckillInfo(Long skuId);
 }
