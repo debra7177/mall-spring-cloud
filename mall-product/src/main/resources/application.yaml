@@ -30,4 +30,4 @@ server:
   port: 10000
 logging:
   level:
-    org.eu.mall: debug
+    org.eu.mall: info
