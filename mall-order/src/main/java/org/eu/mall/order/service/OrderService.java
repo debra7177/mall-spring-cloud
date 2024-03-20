@@ -1,6 +1,7 @@
 package org.eu.mall.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.eu.common.to.mq.SecKillOrderTo;
 import org.eu.common.utils.PageUtils;
 import org.eu.mall.order.entity.OrderEntity;
 import org.eu.mall.order.vo.*;
@@ -65,5 +66,11 @@ public interface OrderService extends IService<OrderEntity> {
      * @return
      */
     String handlePayResult(PayAsyncVo vo);
+
+    /**
+     * 创建秒杀订单
+     * @param secKillOrderTo
+     */
+    void createSecKillOrder(SecKillOrderTo secKillOrderTo);
 }
 

@@ -11,7 +11,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableRedisHttpSession
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "org.eu.mall.seckill.feign")
-@EnableRabbit
+//@EnableRabbit // 监听队列时加注
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class MallSeckillApplication {
 

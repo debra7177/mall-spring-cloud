@@ -3,6 +3,7 @@ package org.eu.mall.order.service.impl;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import org.eu.common.to.mq.OrderTo;
+import org.eu.common.to.mq.SecKillOrderTo;
 import org.eu.common.utils.R;
 import org.eu.common.vo.MemberRespVo;
 import org.eu.mall.order.config.AlipayTemplate;
@@ -461,5 +462,40 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
             baseMapper.updateOrderStatus(outTradeNo, OrderStatusEnum.PAYED.getCode());
         }
         return "success";
+    }
+
+    @Override
+    public void createSecKillOrder(SecKillOrderTo secKillOrderTo) {
+        // 创建订单
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderSn(secKillOrderTo.getOrderSn());
+        orderEntity.setCreateTime(new Date());
+        orderEntity.setMemberId(secKillOrderTo.getMemberId());
+        orderEntity.setStatus(OrderStatusEnum.CREATE_NEW.getCode());
+        BigDecimal total = secKillOrderTo.getSeckillPrice().multiply(new BigDecimal("" + secKillOrderTo.getNum()));
+        orderEntity.setPayAmount(total);
+        save(orderEntity);
+
+        // 保存订单项信息
+        OrderItemEntity itemEntity = new OrderItemEntity();
+        itemEntity.setOrderSn(secKillOrderTo.getOrderSn());
+        itemEntity.setRealAmount(total);
+        // todo 获取当前SKU的详细信息进行设置  productFeignService.getSpuInfoBySkuId()
+        R r = productFeignService.getSpuInfoBySkuId(secKillOrderTo.getSkuId());
+        SpuInfoVo data = r.getData(new TypeReference<SpuInfoVo>() {
+        });
+        itemEntity.setSpuId(data.getId());
+        itemEntity.setSpuBrand(data.getBrandId().toString()); // 品牌id
+        itemEntity.setSpuName(data.getSpuName());
+        itemEntity.setCategoryId(data.getCatalogId());
+        // sku信息
+        itemEntity.setSkuId(secKillOrderTo.getSkuId());
+        //itemEntity.setSkuName(item.getTitle());
+        itemEntity.setSkuPrice(secKillOrderTo.getSeckillPrice());
+        //itemEntity.setSkuPic(item.getImage());
+        // list 转字符串
+        //itemEntity.setSkuAttrsVals(StringUtils.collectionToDelimitedString(item.getSkuAttr(), ";"));
+        itemEntity.setSkuQuantity(secKillOrderTo.getNum()); // 商品购买的数量
+        orderItemService.save(itemEntity);
     }
 }

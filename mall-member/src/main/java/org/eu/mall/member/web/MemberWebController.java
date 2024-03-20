@@ -20,10 +20,10 @@ public class MemberWebController {
     @GetMapping("/memberOrder.html")
     public String memberOrderPage(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum, Model model) {
         Map<String, Object> page = new HashMap<>();
-        page.put("pageNum", pageNum.toString());
+        page.put("page", pageNum.toString());
         R r = orderFeignService.listWithItem(page);
         System.out.println(JSON.toJSONString(r));
-        model.addAttribute("order", r);
+        model.addAttribute("orders", r);
         return "orderList";
     }
 }
