@@ -1,5 +1,6 @@
 package org.eu.mall.seckill.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.eu.common.utils.R;
 import org.eu.mall.seckill.service.SeckillService;
 import org.eu.mall.seckill.to.SecKillSkuRedisTo;
@@ -12,6 +13,7 @@ import java.util.List;
 
 //@RestController
 @Controller
+@Slf4j
 public class SecKillController {
     @Autowired
     private SeckillService seckillService;
@@ -24,6 +26,7 @@ public class SecKillController {
     @ResponseBody
     @GetMapping("/currentSeckillSkus")
     public R currentSeckillSkus() {
+        log.info("currentSeckillSkus正在执行");
         List<SecKillSkuRedisTo> currentSeckillSkus = seckillService.getCurrentSeckillSkus();
         return R.ok().setData(currentSeckillSkus);
     }
