@@ -1,6 +1,7 @@
 package org.eu.mall.order.config;
 
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -8,13 +9,37 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import javax.annotation.PostConstruct;
 
 @Configuration
 public class MyRabbitConfig {
-    @Autowired
+    //@Autowired // 自动注入要循环依赖的问题
     RabbitTemplate rabbitTemplate;
+    //构造器注入
+
+    // 构造器注入也有循环依赖问题
+    //public MyRabbitConfig(RabbitTemplate rabbitTemplate) {
+    //    this.rabbitTemplate = rabbitTemplate;
+    //    initRabbitTemplate();
+    //}
+
+    /**
+     * 不使用自动注入的RabbitTemplate 参考 谷粒商城 - 高级 - sentinel全服务引入
+     * @param connectionFactory
+     * @return
+     */
+    @Primary // 主要的
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory){
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        this.rabbitTemplate = rabbitTemplate;
+        rabbitTemplate.setMessageConverter(messageConverter());
+        initRabbitTemplate();
+        return rabbitTemplate;
+    }
+
     /**
      * 使用JSON序列化机制，进行消息转换
      */
@@ -45,7 +70,8 @@ public class MyRabbitConfig {
      *          channel.basicAck(deliveryTag,false);签收；业务成功完成就应该签收
      *          channel.basicNack(deliveryTag,false,true);拒签；业务失败，拒签
      */
-    @PostConstruct //MyRabbitConfig对象创建完成以后，执行这个方法
+    // 构造器注入 注释@PostConstruct
+    //@PostConstruct //MyRabbitConfig对象创建完成以后，执行这个方法
     public void initRabbitTemplate(){
         //设置确认回调
         rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
