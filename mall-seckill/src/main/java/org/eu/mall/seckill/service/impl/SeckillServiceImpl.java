@@ -2,6 +2,7 @@ package org.eu.mall.seckill.service.impl;
 
 import com.alibaba.csp.sentinel.Entry;
 import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -141,6 +142,14 @@ public class SeckillServiceImpl implements SeckillService {
         });
     }
 
+    public List<SecKillSkuRedisTo> blockHandler(BlockException e){
+        log.error("getCurrentSeckillSkusResource被限流了..");
+        return null;
+    }
+    //返回当前时间可以参与的秒杀商品信息
+    //blockHandler 函数会在原方法被限流/降级/系统保护的时候调用，而 fallback 函数会针对所有类型的异常。
+    // @link https://github.com/alibaba/Sentinel/wiki/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8#%E6%96%B9%E5%BC%8F%E4%BA%8C%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AE%9A%E4%B9%89%E8%B5%84%E6%BA%90
+    @SentinelResource(value = "getCurrentSeckillSkusResource",blockHandler = "blockHandler")
     @Override
     public List<SecKillSkuRedisTo> getCurrentSeckillSkus() {
         // 确定当前时间属于哪个秒杀场次
