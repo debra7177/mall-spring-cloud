@@ -10,6 +10,12 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>mall-third-party</module>
+        <module>mall-seckill</module>
+        <module>mall-search</module>
+        <module>mall-cart</module>
+        <module>mall-auth</module>
+        <module>mall-gateway</module>
         <module>mall-coupon</module>
         <module>mall-member</module>
         <module>mall-order</module>
